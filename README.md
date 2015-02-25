@@ -4,8 +4,8 @@ Source code of the scalability tests of KalibroProcessor and KalibroConfigurario
 # Dependencies
 To run this suite of tests, you must have:
 
-    1. java jdk >= 1.6
-    2. maven >= 3.0.4
+    1. java jdk 1.8
+    2. maven 3.2.5
     
 Also, you must clone the choreos_v-v (https://github.com/choreos/choreos_v-v) and the Enactment Engine (https://github.com/choreos/enactment_engine) repositories. 
 The first one will provide the Rehearsal and Scalability Explorer frameworks. Rehearsal will be used for dynamic creation of clients. Scalability Explorer has flexible way to test the scalability of web services and supports the calculation of three scalability metrics: __speedup__, __degradation__ and __aggregate performance comparison__. Furthermore, it is possible to vary the workload and the probability distribution function of requests over time.
