@@ -25,6 +25,8 @@ Clone the repository, go to the rehearsal directory and run:
     
 Now, go to the scalability_explorer directory and run:
 
+    mvn install
+
 If the tests fail, you can run maven with the following option
 
     mvn install -Dmaven.test.skip=true
