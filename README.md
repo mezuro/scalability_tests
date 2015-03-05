@@ -14,7 +14,9 @@ Enactment Engine is platform that automatically deploys web service compositions
 Scalability Explorer depends on Rehearsal and Enactment Engine. You have to install them first.
 
 ### Enactment Engine Installation
-Clone the repository. Then, on its root directory run:
+Clone the repository. 
+Open the pom.xml file and remove the commentaries from the guava dependency.
+Then, on its root directory run:
 
     mvn install
     
@@ -32,3 +34,12 @@ If the tests fail, you can run maven with the following option
     mvn install -Dmaven.test.skip=true
     
 It will compile the tests but not run it.
+
+### Change your classpath variables
+If the installation run correctly, you should have a .m2/repository/ directory on your home. You have to include it on your Build Path.
+If you are using Eclipse, go to
+
+    Window -> Preferences -> Java -> Build Path -> Classpath Variables
+    
+Click on __New__, insert some name (M2_REPO, for instance) and insert the path. Should be ~/.m2/repository/.
+You will probably need to build your project for these changes to take effect.
