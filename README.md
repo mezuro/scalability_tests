@@ -14,7 +14,9 @@ Enactment Engine is platform that automatically deploys web service compositions
 Scalability Explorer depends on Rehearsal and Enactment Engine. You have to install them first.
 
 ### Enactment Engine Installation
-Clone the repository. Then, on its root directory run:
+Clone the repository. 
+Open the pom.xml file and remove the commentaries from the guava dependency.
+Then, on its root directory run:
 
     mvn install
     
