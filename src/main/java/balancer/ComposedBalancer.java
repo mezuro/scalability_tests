@@ -3,7 +3,7 @@ package balancer;
 import java.io.File;
 
 import repositoryEndpoint.ProcessRepository;
-import support.BalancerDepolyer;
+import support.BalancerDeployer;
 import support.Strategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -66,7 +66,7 @@ public class ComposedBalancer extends Experiment<Item, Item> {
 	public static void main(String[] args) throws Exception {
 		repository = new ComposedBalancer();
 
-		repository.setDeployer(new BalancerDepolyer());
+		repository.setDeployer(new BalancerDeployer());
 		ExperimentStrategy capacityStrategy = new ParameterScaling("");
 		capacityStrategy.setParameterInitialValue(1);
 		capacityStrategy.setFunction(new LinearIncrease(1));

@@ -6,13 +6,13 @@ import java.util.Map;
 import eu.choreos.vv.clientgenerator.WSClient;
 import eu.choreos.vv.deployment.Deployer;
 
-public class BalancerDepolyer implements Deployer {
+public class BalancerDeployer implements Deployer {
 
 	private final String BALANCER_WSDL = "http://10.0.0.14:8080/KalibroService/LoadBalancerEndpoint/?wsdl";
 	private String[] processorsIPs = {"10.0.0.9", "10.0.0.18", "10.0.0.11", "10.0.0.19", "10.0.0.12"};
 	private static WSClient balancerClient;
 
-	public BalancerDepolyer() throws Exception {
+	public BalancerDeployer() throws Exception {
 		balancerClient = new WSClient(BALANCER_WSDL);
 	}
 

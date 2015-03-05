@@ -3,7 +3,7 @@ package balancer;
 import java.io.File;
 
 import repositoryEndpoint.ProcessRepository;
-import support.BalancerDepolyer;
+import support.BalancerDeployer;
 import support.Strategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -64,7 +64,7 @@ public class SpeedupBalancer extends Experiment<Item, Item> {
 	public static void main(String[] args) throws Exception {
 		repository = new SpeedupBalancer();
 
-		repository.setDeployer(new BalancerDepolyer());
+		repository.setDeployer(new BalancerDeployer());
 		ExperimentStrategy experimentStrategy = new ParameterScaling("");
 		experimentStrategy.setParameterInitialValue(1);
 		experimentStrategy.setFunction(new LinearIncrease(1));
