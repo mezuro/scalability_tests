@@ -1,0 +1,75 @@
+<report>
+<name>
+processRepository
+</name>
+<measurementUnit>
+response time (msec)
+</measurementUnit>
+<parameterLabels>
+<label>
+load
+</label>
+</parameterLabels>
+<data>
+<iteration startTime="Fri Nov 01 13:42:06 BRST 2013" sequence="1" endTime="Fri Nov 01 13:43:10 BRST 2013">
+<parameters>
+<value>
+1
+</value>
+</parameters>
+<measurements>
+<value>
+20452.0
+</value>
+</measurements>
+</iteration>
+<iteration startTime="Fri Nov 01 13:43:10 BRST 2013" sequence="2" endTime="Fri Nov 01 13:44:12 BRST 2013">
+<parameters>
+<value>
+6.0
+</value>
+</parameters>
+<measurements>
+<value>
+20002.0
+</value>
+</measurements>
+</iteration>
+<iteration startTime="Fri Nov 01 13:44:12 BRST 2013" sequence="3" endTime="Fri Nov 01 13:45:25 BRST 2013">
+<parameters>
+<value>
+11.0
+</value>
+</parameters>
+<measurements>
+<value>
+20116.0
+</value>
+</measurements>
+</iteration>
+<iteration startTime="Fri Nov 01 13:45:25 BRST 2013" sequence="4" endTime="Fri Nov 01 13:46:27 BRST 2013">
+<parameters>
+<value>
+16.0
+</value>
+</parameters>
+<measurements>
+<value>
+20090.0
+</value>
+</measurements>
+</iteration>
+<iteration startTime="Fri Nov 01 13:46:27 BRST 2013" sequence="5" endTime="Fri Nov 01 13:47:29 BRST 2013">
+<parameters>
+<value>
+21.0
+</value>
+</parameters>
+<measurements>
+<value>
+19822.0
+</value>
+</measurements>
+</iteration>
+</data>
+</report>
