@@ -7,7 +7,7 @@ public class GetMetricConfiguration extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("getMetricConfiguration", "1");
+		return rsClient.request("getMetricConfiguration", "1");
 	}
 
 }

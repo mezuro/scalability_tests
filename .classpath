@@ -18,9 +18,6 @@
 	<classpathentry kind="var" path="M2_REPO/eu/choreos/rehearsal/0.13/rehearsal-0.13.jar"/>
 	<classpathentry kind="var" path="M2_REPO/eu/choreos/vvws/musicstore/1.0-SNAPSHOT/musicstore-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/jayway/restassured/rest-assured/1.2.2/rest-assured-1.2.2.jar" sourcepath="M2_REPO/com/jayway/restassured/rest-assured/1.2.2/rest-assured-1.2.2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/groovy/modules/http-builder/http-builder/0.5.1/http-builder-0.5.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" sourcepath="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar" sourcepath="M2_REPO/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15-sources.jar"/>
@@ -114,5 +111,12 @@
 	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava-annotations/r03/guava-annotations-r03.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava-primitives/r03/guava-primitives-r03.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava-base/r03/guava-base-r03.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/json-20140107.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/unirest-java-1.4.5.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpcore-4.3.3.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpasyncclient-4.0.2.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpmime-4.3.6.jar"/>
+	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpcore-nio-4.3.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

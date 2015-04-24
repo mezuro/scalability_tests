@@ -7,7 +7,7 @@ public class GetBaseTool extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("getBaseTool", "Analizo");
+		return rsClient.request("getBaseTool", "Analizo");
 	}
 
 }

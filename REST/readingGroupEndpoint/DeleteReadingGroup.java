@@ -7,12 +7,12 @@ import java.util.Stack;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DeleteReadingGroup extends RESTStrategy {
 
 	private final String READING_GROUP_WSDL = "http://10.0.0.12:8080/KalibroService/ReadingGroupEndpoint/?wsdl";
-	private static WSClient readingGroupClient;
+	private static RSClient readingGroupClient;
 	private int requestsPerStep;
 	private Stack<String> idList;
 	private int append = 0;
@@ -23,7 +23,7 @@ public class DeleteReadingGroup extends RESTStrategy {
 		this.requestsPerStep = requestsPerStep;
 		idList = new Stack<String>();
 		errors = new ArrayList<Integer>();
-		readingGroupClient = new WSClient(READING_GROUP_WSDL);
+		readingGroupClient = new RSClient(READING_GROUP_WSDL);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class DeleteReadingGroup extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("deleteReadingGroup", idList.pop());
+		return rsClient.request("deleteReadingGroup", idList.pop());
 	}
 
 	@Override

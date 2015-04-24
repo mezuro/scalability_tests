@@ -14,7 +14,7 @@ import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
 import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ComposedStrategy;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
@@ -61,7 +61,7 @@ public class Project extends Experiment<Item, Item> {
 	@Override
 	public void beforeIteration() throws Exception {
 		projectStrategy.beforeStep();
-		projectStrategy.setWsClient(new WSClient(getDeployer().getServiceUris("Project").get(0)));
+		projectStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Project").get(0)));
 	}
 
 	@Override

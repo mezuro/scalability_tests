@@ -7,7 +7,7 @@ public class ReadingGroupExists extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("readingGroupExists", "1");
+		return rsClient.request("readingGroupExists", "1");
 	}
 
 }

@@ -13,7 +13,7 @@ import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
 import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
@@ -42,7 +42,7 @@ public class Reading extends Experiment<Item, Item> {
 	@Override
 	public void beforeIteration() throws Exception {
 		readingStrategy.beforeStep();
-		readingStrategy.setWsClient(new WSClient(getDeployer().getServiceUris("Reading").get(0)));
+		readingStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Reading").get(0)));
 	}
 
 	@Override

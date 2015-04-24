@@ -7,12 +7,12 @@ import java.util.Stack;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DeleteConfiguration extends RESTStrategy {
 
 	private final String CONFIGURATION_WSDL = "http://10.0.0.12:8080/KalibroService/ConfigurationEndpoint/?wsdl";
-	private static WSClient configurationClient;
+	private static RSClient configurationClient;
 	private int requestsPerStep;
 	private Stack<String> idList;
 	private int append = 0;
@@ -23,7 +23,7 @@ public class DeleteConfiguration extends RESTStrategy {
 		this.requestsPerStep = requestsPerStep;
 		idList = new Stack<String>();
 		errors = new ArrayList<Integer>();
-		configurationClient = new WSClient(CONFIGURATION_WSDL);
+		configurationClient = new RSClient(CONFIGURATION_WSDL);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class DeleteConfiguration extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("deleteConfiguration", idList.pop());
+		return rsClient.request("deleteConfiguration", idList.pop());
 	}
 
 	@Override

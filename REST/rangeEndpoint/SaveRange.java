@@ -6,14 +6,14 @@ import java.util.List;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.exceptions.FrameworkException;
 import eu.choreos.vv.exceptions.InvalidOperationNameException;
 
 public class SaveRange extends RESTStrategy {
 
 	private final String METRIC_CONFIGURATION_WSDL = "http://10.0.0.12:8080/KalibroService/MetricConfigurationEndpoint/?wsdl";
-	private static WSClient metricConfigurationClient;
+	private static RSClient metricConfigurationClient;
 	private ItemImpl saveMetricConfiguration;
 	private Item metricConfigurationResponse;
 	private int step = 0;
@@ -22,7 +22,7 @@ public class SaveRange extends RESTStrategy {
 	private Integer append = 0;
 
 	public SaveRange() throws Exception {
-		metricConfigurationClient = new WSClient(METRIC_CONFIGURATION_WSDL);
+		metricConfigurationClient = new RSClient(METRIC_CONFIGURATION_WSDL);
 		idList = new ArrayList<String>();
 		errors = new ArrayList<Integer>();
 	}
@@ -66,7 +66,7 @@ public class SaveRange extends RESTStrategy {
 
 	@Override
 	public Item request(Item saveRange) throws Exception {
-		return wsClient.request("saveRange", saveRange);
+		return rsClient.request("saveRange", saveRange);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class SaveRange extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteRange", id);
+			rsClient.request("deleteRange", id);
 		}
 		errors.add(step);
 		step = 0;

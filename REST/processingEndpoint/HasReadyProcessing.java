@@ -3,22 +3,22 @@ package processingEndpoint;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class HasReadyProcessing extends RESTStrategy {
 
 	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
 	private final String REPOSITORY_WSDL = "http://10.0.0.12:8080/KalibroService/RepositoryEndpoint/?wsdl";
-	private static WSClient projectClient;
-	private static WSClient repositoryClient;
+	private static RSClient projectClient;
+	private static RSClient repositoryClient;
 	private Item requestProjectResponse;
 	private Item requestRepositoryResponse;
 	private ItemImpl saveRepository;
 	private ItemImpl saveProject;
 
 	public HasReadyProcessing() throws Exception {
-		projectClient = new WSClient(PROJECT_WSDL);
-		repositoryClient = new WSClient(REPOSITORY_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
+		repositoryClient = new RSClient(REPOSITORY_WSDL);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class HasReadyProcessing extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("hasReadyProcessing", requestRepositoryResponse.getContent("repositoryId"));
+		return rsClient.request("hasReadyProcessing", requestRepositoryResponse.getContent("repositoryId"));
 	}
 
 	@Override

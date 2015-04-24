@@ -7,7 +7,7 @@ public class AllConfigurations extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("allConfigurations");
+		return rsClient.request("allConfigurations");
 	}
 
 }

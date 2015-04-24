@@ -44,7 +44,7 @@ public class SaveMetricConfiguration extends RESTStrategy {
 
 	@Override
 	public Item request(Item saveMetricConfiguration) throws Exception {
-		return wsClient.request("saveMetricConfiguration", saveMetricConfiguration);
+		return rsClient.request("saveMetricConfiguration", saveMetricConfiguration);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class SaveMetricConfiguration extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteMetricConfiguration", id);
+			rsClient.request("deleteMetricConfiguration", id);
 		}
 		errors.add(step);
 		step = 0;

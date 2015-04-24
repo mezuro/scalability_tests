@@ -7,14 +7,14 @@ import java.util.Stack;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DeleteRepository extends RESTStrategy {
 
 	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
 	private final String REPOSITORY_WSDL = "http://10.0.0.12:8080/KalibroService/RepositoryEndpoint/?wsdl";
-	private static WSClient projectClient;
-	private static WSClient repositoryClient;
+	private static RSClient projectClient;
+	private static RSClient repositoryClient;
 	private Item requestProjectResponse;
 	private ItemImpl saveProject;
 	private int requestsPerStep;
@@ -26,9 +26,9 @@ public class DeleteRepository extends RESTStrategy {
 	public DeleteRepository(int requestsPerStep) throws Exception {
 		this.requestsPerStep = requestsPerStep;
 		idList = new Stack<String>();
-		projectClient = new WSClient(PROJECT_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
 		errors = new ArrayList<Integer>();
-		repositoryClient = new WSClient(REPOSITORY_WSDL);
+		repositoryClient = new RSClient(REPOSITORY_WSDL);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class DeleteRepository extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("deleteRepository", idList.pop());
+		return rsClient.request("deleteRepository", idList.pop());
 	}
 
 	@Override

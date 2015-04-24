@@ -9,7 +9,7 @@ public class AllProjects extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws InvalidOperationNameException, FrameworkException {
-		return wsClient.request("allProjects");
+		return rsClient.request("allProjects");
 	}
 
 }

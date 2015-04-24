@@ -33,7 +33,7 @@ public class SaveReadingGroup extends RESTStrategy {
 
 	@Override
 	public Item request(Item saveReadingGroup) throws Exception {
-		return wsClient.request("saveReadingGroup", saveReadingGroup);
+		return rsClient.request("saveReadingGroup", saveReadingGroup);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class SaveReadingGroup extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteReadingGroup", id);
+			rsClient.request("deleteReadingGroup", id);
 		}
 		errors.add(step);
 		step = 0;

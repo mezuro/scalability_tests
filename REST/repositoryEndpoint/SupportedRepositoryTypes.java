@@ -7,7 +7,7 @@ public class SupportedRepositoryTypes extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("supportedRepositoryTypes");
+		return rsClient.request("supportedRepositoryTypes");
 	}
 
 }

@@ -7,14 +7,14 @@ import java.util.Stack;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DeleteRange extends RESTStrategy {
 
 	private final String METRIC_CONFIGURATION_WSDL = "http://10.0.0.12:8080/KalibroService/MetricConfigurationEndpoint/?wsdl";
 	private final String RANGE_WSDL = "http://10.0.0.12:8080/KalibroService/RangeEndpoint/?wsdl";
-	private static WSClient metricConfigurationClient;
-	private static WSClient rangeClient;
+	private static RSClient metricConfigurationClient;
+	private static RSClient rangeClient;
 	private ItemImpl saveMetricConfiguration;
 	private Item metricConfigurationResponse;
 	private int requestsPerStep;
@@ -24,11 +24,11 @@ public class DeleteRange extends RESTStrategy {
 	private Integer append = 0;
 
 	public DeleteRange(int requestsPerStep) throws Exception {
-		metricConfigurationClient = new WSClient(METRIC_CONFIGURATION_WSDL);
+		metricConfigurationClient = new RSClient(METRIC_CONFIGURATION_WSDL);
 		this.requestsPerStep = requestsPerStep;
 		idList = new Stack<String>();
 		errors = new ArrayList<Integer>();
-		rangeClient = new WSClient(RANGE_WSDL);
+		rangeClient = new RSClient(RANGE_WSDL);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class DeleteRange extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("deleteRange", idList.pop());
+		return rsClient.request("deleteRange", idList.pop());
 	}
 
 	@Override

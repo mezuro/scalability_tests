@@ -1,30 +1,28 @@
 package degradation;
 
-import java.io.File;
-
 import repositoryEndpoint.ProcessRepository;
 import support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
-import eu.choreos.vv.analysis.SaveToXML;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
-import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
 
-public class Repository extends Experiment<Item, Item> {
+public class Repository extends Experiment<String, String> {
 
-	private static final int REQUESTS_PER_STEP = 7;
-	private final String WSDL = "http://10.0.0.9:8080/KalibroService/RepositoryEndpoint/?wsdl";
+	private static final int REQUESTS_PER_STEP = 1;
+	private final String BASE_URI = "http://aguia1.ime.usp.br";
+	private final int PORT = 8082;
+	private final String BASE_PATH = "/";
 	private RESTStrategy repositoryStrategy;
-	private static WSClient kalibroClient;
+	private static RSClient kalibroClient;
 	private static Repository repository;
 
 	public Repository() throws Exception {
-		kalibroClient = new WSClient(WSDL);
+		kalibroClient = new RSClient(BASE_URI, BASE_PATH, PORT);
 	}
 
 	public void setRepositoryStrategy(RESTStrategy repositoryStrategy) {
@@ -32,7 +30,7 @@ public class Repository extends Experiment<Item, Item> {
 	}
 
 	@Override
-	public void afterRequest(Item requestResponse) throws Exception {
+	public void afterRequest(String requestResponse) throws Exception {
 		repositoryStrategy.afterRequest(requestResponse);
 	}
 
@@ -42,7 +40,7 @@ public class Repository extends Experiment<Item, Item> {
 	}
 
 	@Override
-	public Item beforeRequest() throws Exception {
+	public String beforeRequest() throws Exception {
 		return repositoryStrategy.beforeRequest();
 	}
 
@@ -62,8 +60,8 @@ public class Repository extends Experiment<Item, Item> {
 	}
 
 	@Override
-	public Item request(Item item) throws Exception {
-		return repositoryStrategy.request(item);
+	public String request(String string) throws Exception {
+		return repositoryStrategy.request(string);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -72,9 +70,9 @@ public class Repository extends Experiment<Item, Item> {
 		repository.setStrategy(experimentStrategy);
 
 		repository.setNumberOfRequestsPerStep(REQUESTS_PER_STEP);
-		repository.setNumberOfSteps(4);
+		repository.setNumberOfSteps(1);
 		repository.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Repository Aggregate Performance",
-			new MeanChartCreator()), new SaveToXML(new File("results/degradation/new1ProcessRepositoryResults.xml"))));
+			new MeanChartCreator())));
 
 //		old
 //		experimentStrategy.setParameterInitialValue(50);
@@ -97,7 +95,7 @@ public class Repository extends Experiment<Item, Item> {
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
 		throws Exception {
-		strategy.setWsClient(kalibroClient);
+		strategy.setRsClient(kalibroClient);
 		repository.setRepositoryStrategy(strategy);
 		repository.run(label, plotGraph);
 	}

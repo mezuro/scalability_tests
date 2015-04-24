@@ -7,12 +7,12 @@ import java.util.Stack;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DeleteReading extends RESTStrategy {
 
 	private final String READING_WSDL = "http://10.0.0.12:8080/KalibroService/ReadingEndpoint/?wsdl";
-	private static WSClient readingClient;
+	private static RSClient readingClient;
 	private int requestsPerStep;
 	private Stack<String> idList;
 	private int append = 0;
@@ -23,7 +23,7 @@ public class DeleteReading extends RESTStrategy {
 		this.requestsPerStep = requestsPerStep;
 		idList = new Stack<String>();
 		errors = new ArrayList<Integer>();
-		readingClient = new WSClient(READING_WSDL);
+		readingClient = new RSClient(READING_WSDL);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class DeleteReading extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("deleteReading", idList.pop());
+		return rsClient.request("deleteReading", idList.pop());
 	}
 
 	@Override

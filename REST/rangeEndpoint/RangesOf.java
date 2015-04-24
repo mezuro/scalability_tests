@@ -3,17 +3,17 @@ package rangeEndpoint;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class RangesOf extends RESTStrategy {
 
 	private final String METRIC_CONFIGURATION_WSDL = "http://10.0.0.12:8080/KalibroService/MetricConfigurationEndpoint/?wsdl";
-	private static WSClient metricConfigurationClient;
+	private static RSClient metricConfigurationClient;
 	private ItemImpl saveMetricConfiguration;
 	private Item requestResponse;
 
 	public RangesOf() throws Exception {
-		metricConfigurationClient = new WSClient(METRIC_CONFIGURATION_WSDL);
+		metricConfigurationClient = new RSClient(METRIC_CONFIGURATION_WSDL);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class RangesOf extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("rangesOf", requestResponse.getContent("metricConfigurationId"));
+		return rsClient.request("rangesOf", requestResponse.getContent("metricConfigurationId"));
 	}
 
 	@Override

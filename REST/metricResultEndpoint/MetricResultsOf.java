@@ -3,16 +3,16 @@ package metricResultEndpoint;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class MetricResultsOf extends RESTStrategy {
 
 	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
 	private final String REPOSITORY_WSDL = "http://10.0.0.12:8080/KalibroService/RepositoryEndpoint/?wsdl";
 	private final String PROCESSING_WSDL = "http://10.0.0.12:8080/KalibroService/ProcessingEndpoint/?wsdl";
-	private static WSClient projectClient;
-	private static WSClient repositoryClient;
-	private static WSClient processingClient;
+	private static RSClient projectClient;
+	private static RSClient repositoryClient;
+	private static RSClient processingClient;
 	private Item requestProjectResponse;
 	private Item requestRepositoryResponse;
 	private Item requestProcessingResponse;
@@ -20,9 +20,9 @@ public class MetricResultsOf extends RESTStrategy {
 	private ItemImpl saveProject;
 
 	public MetricResultsOf() throws Exception {
-		projectClient = new WSClient(PROJECT_WSDL);
-		repositoryClient = new WSClient(REPOSITORY_WSDL);
-		processingClient = new WSClient(PROCESSING_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
+		repositoryClient = new RSClient(REPOSITORY_WSDL);
+		processingClient = new RSClient(PROCESSING_WSDL);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class MetricResultsOf extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("metricResultsOf",
+		return rsClient.request("metricResultsOf",
 			requestProcessingResponse.getChild("processing").getContent("resultsRootId"));
 	}
 

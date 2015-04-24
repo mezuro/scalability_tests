@@ -6,14 +6,14 @@ import java.util.List;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.exceptions.FrameworkException;
 import eu.choreos.vv.exceptions.InvalidOperationNameException;
 
 public class SaveRepository extends RESTStrategy {
 
 	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
-	private static WSClient projectClient;
+	private static RSClient projectClient;
 	private Item requestProjectResponse;
 	private ItemImpl saveProject;
 	private List<String> idList;
@@ -48,14 +48,14 @@ public class SaveRepository extends RESTStrategy {
 	}
 
 	public SaveRepository() throws Exception {
-		projectClient = new WSClient(PROJECT_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
 		idList = new ArrayList<String>();
 		errors = new ArrayList<Integer>();
 	}
 
 	@Override
 	public Item request(Item saveRepository) throws Exception {
-		return wsClient.request("saveRepository", saveRepository);
+		return rsClient.request("saveRepository", saveRepository);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class SaveRepository extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteRepository", id);
+			rsClient.request("deleteRepository", id);
 		}
 		errors.add(step);
 		step = 0;

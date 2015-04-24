@@ -3,17 +3,17 @@ package projectEndpoint;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class GetProject extends RESTStrategy {
 
 	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
-	private static WSClient projectClient;
+	private static RSClient projectClient;
 	private Item requestResponse;
 	private ItemImpl saveProject;
 
 	public GetProject() throws Exception {
-		projectClient = new WSClient(PROJECT_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
 	}
 
 	@Override
@@ -28,12 +28,12 @@ public class GetProject extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("getProject", requestResponse.getContent("projectId"));
+		return rsClient.request("getProject", requestResponse.getContent("projectId"));
 	}
 
 	@Override
 	public void afterExperiment() throws Exception {
-		wsClient.request("deleteProject", requestResponse.getContent("projectId"));
+		rsClient.request("deleteProject", requestResponse.getContent("projectId"));
 	}
 
 }

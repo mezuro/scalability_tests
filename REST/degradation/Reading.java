@@ -12,7 +12,7 @@ import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
 import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
@@ -23,11 +23,11 @@ public class Reading extends Experiment<Item, Item> {
 	private static final int REQUESTS_PER_STEP = 10;
 	private final String WSDL = "http://10.0.0.12:8080/KalibroService/ReadingEndpoint/?wsdl";
 	private RESTStrategy readingStrategy;
-	private static WSClient kalibroClient;
+	private static RSClient kalibroClient;
 	private static Reading reading;
 
 	public Reading() throws Exception {
-		kalibroClient = new WSClient(WSDL);
+		kalibroClient = new RSClient(WSDL);
 	}
 
 	public void setReadingStrategy(RESTStrategy readingStrategy) {
@@ -92,7 +92,7 @@ public class Reading extends Experiment<Item, Item> {
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
 		throws Exception {
-		strategy.setWsClient(kalibroClient);
+		strategy.setRsClient(kalibroClient);
 		reading.setReadingStrategy(strategy);
 		reading.run(label, plotGraph);
 	}

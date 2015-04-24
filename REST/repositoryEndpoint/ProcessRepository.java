@@ -1,80 +1,76 @@
 package repositoryEndpoint;
 
+import org.json.JSONObject;
+
 import support.RESTStrategy;
-import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 
 public class ProcessRepository extends RESTStrategy {
 
-	private final String PROJECT_WSDL = "http://localhost:8080/KalibroService/ProjectEndpoint/?wsdl";
-	private final String REPOSITORY_WSDL = "http://localhost:8080/KalibroService/RepositoryEndpoint/?wsdl";
-	private final String PROCESSING_WSDL = "http://localhost:8080/KalibroService/ProcessingEndpoint/?wsdl";
-	private static WSClient projectClient;
-	private static WSClient repositoryClient;
-	private static WSClient processingClient;
-	private Item requestProjectResponse;
-	private Item requestRepositoryResponse;
-	private ItemImpl saveRepository;
-	private ItemImpl saveProject;
+	private final String BASE_URI = "http://localhost:";
+	private final String PORT = "8082";
+	private final String PROJECT_PATH = "/projects";
+	private final String REPOSITORY_PATH = "/repositories";
+	private String projectId;
+	private String repositoryId;
 	private int append = 0;
-
-	public ProcessRepository() throws Exception {
-		projectClient = new WSClient(PROJECT_WSDL);
-		repositoryClient = new WSClient(REPOSITORY_WSDL);
-		processingClient = new WSClient(PROCESSING_WSDL);
-	}
 
 	@Override
 	public void beforeExperiment() throws Exception {
-		saveProject = new ItemImpl("saveProject");
-		Item project = saveProject.addChild("project");
-		project.addChild("id").setContent("");
-		project.addChild("description").setContent("Description");
-		project.addChild("name").setContent("c123235");
-		requestProjectResponse = projectClient.request("saveProject", saveProject);
+		String body = "{\"project\":{\"name\":\"Project\"}}";
+		HttpResponse<JsonNode> response = Unirest.post(BASE_URI + PORT + PROJECT_PATH)
+				  .header("Content-Type", "application/json")
+				  .header("accept", "application/json")
+				  .body(body)
+				  .asJson();
+		projectId = ((JSONObject) (response.getBody().getObject().get("project"))).get("id").toString();
 	}
 
 	@Override
-	public Item beforeRequest() throws Exception {
-		saveRepository = new ItemImpl("saveRepository");
-		Item repository = saveRepository.addChild("repository");
-		repository.addChild("id").setContent("");
-		repository.addChild("address").setContent("svn://svn.code.sf.net/p/qt-calculator/code/trunk");
-		repository.addChild("processPeriod").setContent("0");
-		repository.addChild("description").setContent("desc");
-		repository.addChild("name").setContent("name" + append++);
-		repository.addChild("type").setContent("SUBVERSION");
-		repository.addChild("license").setContent("GPL");
-		repository.addChild("configurationId").setContent("1");
-		saveRepository.addChild("projectId").setContent(requestProjectResponse.getContent("projectId"));
-		requestRepositoryResponse = repositoryClient.request("saveRepository", saveRepository);
-		return requestRepositoryResponse;
+	public String beforeRequest() throws Exception {
+		String body = "{\"repository\":{\"name\":\"Repository"+(append++)+"\","
+					+ " \"address\":\"svn://svn.code.sf.net/p/qt-calculator/code/trunk\","
+					+ "\"scm_type\":\"SVN\","
+					+ "\"kalibro_configuration_id\":\"1\","
+					+ "\"project_id\":\""+projectId+"\"}}";
+		HttpResponse<JsonNode> response = Unirest.post(BASE_URI + PORT + REPOSITORY_PATH)
+				  .header("Content-Type", "application/json")
+				  .header("accept", "application/json")
+				  .body(body)
+				  .asJson();
+		repositoryId = ((JSONObject) (response.getBody().getObject().get("repository"))).get("id").toString();
+		return repositoryId;
+	}
+//
+	@Override
+	public String request(String string) throws Exception {
+		Unirest.get(BASE_URI + PORT + REPOSITORY_PATH + "/" + repositoryId + "/process")
+				  .header("Content-Type", "application/json")
+				  .header("accept", "application/json")
+				  .asJson();
+		return string;
 	}
 
 	@Override
-	public Item request(Item item) throws Exception {
-		wsClient.request("processRepository", item.getContent("repositoryId"));
-		return item;
-	}
-
-//	@Override
-//	public void afterRequest(Item requestResponse) throws Exception {
-//		repositoryClient.request("cancelProcessingOfRepository", requestResponse.getContent("repositoryId"));
-//	}
-
-	@Override
-	public synchronized void afterRequest(Item requestResponse) throws Exception {
+	public synchronized void afterRequest(String requestResponse) throws Exception {
 		Thread.sleep(1000);
-		while (processingClient.request("hasReadyProcessing", requestResponse.getContent("repositoryId"))
-			.getContent("exists").equals("false")) {
-			Thread.sleep(5000);
+		while (Unirest.get(BASE_URI + PORT + REPOSITORY_PATH + "/" + repositoryId + "/has_ready_processing")
+				  .header("Content-Type", "application/json")
+				  .header("accept", "application/json")
+				  .asJson().getBody().getObject().get("has_ready_processing").equals("false")) {
+			Thread.sleep(1000);
 		}
 	}
 
-//	@Override
-//	public void afterExperiment() throws Exception {
-//		projectClient.request("deleteProject", requestProjectResponse.getContent("projectId"));
-//	}
+	@Override
+	public void afterExperiment() throws Exception {
+		Unirest.delete(BASE_URI + PORT + PROJECT_PATH + "/" + projectId)
+		  .header("Content-Type", "application/json")
+		  .header("accept", "application/json")
+		  .asJson();
+	}
 
 }

@@ -1,23 +1,22 @@
 package support;
 
-import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public abstract class RESTStrategy {
 
-	protected WSClient wsClient;
+	protected RSClient rsClient;
 
-	public void setWsClient(WSClient wsClient) {
-		this.wsClient = wsClient;
+	public void setRsClient(RSClient rsClient) {
+		this.rsClient = rsClient;
 	}
 
-	public abstract Item request(Item item) throws Exception;
+	public abstract String request(String string) throws Exception;
 
-	public Item beforeRequest() throws Exception {
+	public String beforeRequest() throws Exception {
 		return null;
 	}
 
-	public void afterRequest(Item requestResponse) throws Exception {}
+	public void afterRequest(String requestResponse) throws Exception {}
 
 	public void afterStep() throws Exception {}
 

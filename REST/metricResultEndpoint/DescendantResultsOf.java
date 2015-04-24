@@ -3,7 +3,7 @@ package metricResultEndpoint;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DescendantResultsOf extends RESTStrategy {
 
@@ -11,10 +11,10 @@ public class DescendantResultsOf extends RESTStrategy {
 	private final String REPOSITORY_WSDL = "http://10.0.0.12:8080/KalibroService/RepositoryEndpoint/?wsdl";
 	private final String PROCESSING_WSDL = "http://10.0.0.12:8080/KalibroService/ProcessingEndpoint/?wsdl";
 	private final String METRIC_RESULT_WSDL = "http://10.0.0.12:8080/KalibroService/MetricResultEndpoint/?wsdl";
-	private static WSClient projectClient;
-	private static WSClient repositoryClient;
-	private static WSClient processingClient;
-	private static WSClient metricResultClient;
+	private static RSClient projectClient;
+	private static RSClient repositoryClient;
+	private static RSClient processingClient;
+	private static RSClient metricResultClient;
 	private Item requestProjectResponse;
 	private Item requestRepositoryResponse;
 	private Item requestProcessingResponse;
@@ -23,10 +23,10 @@ public class DescendantResultsOf extends RESTStrategy {
 	private ItemImpl saveProject;
 
 	public DescendantResultsOf() throws Exception {
-		projectClient = new WSClient(PROJECT_WSDL);
-		repositoryClient = new WSClient(REPOSITORY_WSDL);
-		processingClient = new WSClient(PROCESSING_WSDL);
-		metricResultClient = new WSClient(METRIC_RESULT_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
+		repositoryClient = new RSClient(REPOSITORY_WSDL);
+		processingClient = new RSClient(PROCESSING_WSDL);
+		metricResultClient = new RSClient(METRIC_RESULT_WSDL);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class DescendantResultsOf extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("descendantResultsOf",
+		return rsClient.request("descendantResultsOf",
 			requestMetricResultResponse.getChild("metricResult").getContent("id"));
 	}
 

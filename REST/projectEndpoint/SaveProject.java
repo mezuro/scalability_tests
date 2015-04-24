@@ -33,7 +33,7 @@ public class SaveProject extends RESTStrategy {
 
 	@Override
 	public Item request(Item saveProject) throws Exception {
-		return wsClient.request("saveProject", saveProject);
+		return rsClient.request("saveProject", saveProject);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class SaveProject extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteProject", id);
+			rsClient.request("deleteProject", id);
 		}
 		errors.add(step);
 		step = 0;

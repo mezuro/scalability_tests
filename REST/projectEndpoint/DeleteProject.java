@@ -7,12 +7,12 @@ import java.util.Stack;
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.WSClient;
+import eu.choreos.vv.clientgenerator.RSClient;
 
 public class DeleteProject extends RESTStrategy {
 
 	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
-	private static WSClient projectClient;
+	private static RSClient projectClient;
 	private int requestsPerStep;
 	private Stack<String> idList;
 	private int append = 0;
@@ -23,7 +23,7 @@ public class DeleteProject extends RESTStrategy {
 		this.requestsPerStep = requestsPerStep;
 		idList = new Stack<String>();
 		errors = new ArrayList<Integer>();
-		projectClient = new WSClient(PROJECT_WSDL);
+		projectClient = new RSClient(PROJECT_WSDL);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class DeleteProject extends RESTStrategy {
 
 	@Override
 	public Item request(Item item) throws Exception {
-		return wsClient.request("deleteProject", idList.pop());
+		return rsClient.request("deleteProject", idList.pop());
 	}
 
 	@Override

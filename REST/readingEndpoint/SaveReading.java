@@ -35,7 +35,7 @@ public class SaveReading extends RESTStrategy {
 
 	@Override
 	public Item request(Item saveReading) throws Exception {
-		return wsClient.request("saveReading", saveReading);
+		return rsClient.request("saveReading", saveReading);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class SaveReading extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteReading", id);
+			rsClient.request("deleteReading", id);
 		}
 		errors.add(step);
 		step = 0;

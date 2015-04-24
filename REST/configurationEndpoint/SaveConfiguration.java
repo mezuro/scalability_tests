@@ -33,7 +33,7 @@ public class SaveConfiguration extends RESTStrategy {
 
 	@Override
 	public Item request(Item saveConfiguration) throws Exception {
-		return wsClient.request("saveConfiguration", saveConfiguration);
+		return rsClient.request("saveConfiguration", saveConfiguration);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class SaveConfiguration extends RESTStrategy {
 	@Override
 	public void afterStep() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
-			wsClient.request("deleteConfiguration", id);
+			rsClient.request("deleteConfiguration", id);
 		}
 		errors.add(step);
 		step = 0;
