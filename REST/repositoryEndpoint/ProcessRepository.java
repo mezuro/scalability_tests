@@ -1,5 +1,7 @@
 package repositoryEndpoint;
 
+import java.util.HashMap;
+
 import org.json.JSONObject;
 
 import support.RESTStrategy;
@@ -20,26 +22,34 @@ public class ProcessRepository extends RESTStrategy {
 
 	@Override
 	public void beforeExperiment() throws Exception {
-		String body = "{\"project\":{\"name\":\"Project\"}}";
+		HashMap<String, HashMap<String, String>> parameters = new HashMap<String, HashMap<String, String>>();
+		HashMap<String, String> project = new HashMap<String, String>();
+		project.put("name", "Project");
+		parameters.put("project", project);
+		JSONObject jsonBody = new JSONObject(parameters);
 		HttpResponse<JsonNode> response = Unirest.post(BASE_URI + PORT + PROJECT_PATH)
 				  .header("Content-Type", "application/json")
 				  .header("accept", "application/json")
-				  .body(body)
+				  .body(jsonBody.toString())
 				  .asJson();
 		projectId = ((JSONObject) (response.getBody().getObject().get("project"))).get("id").toString();
 	}
 
 	@Override
 	public String beforeRequest() throws Exception {
-		String body = "{\"repository\":{\"name\":\"Repository"+(append++)+"\","
-					+ " \"address\":\"svn://svn.code.sf.net/p/qt-calculator/code/trunk\","
-					+ "\"scm_type\":\"SVN\","
-					+ "\"kalibro_configuration_id\":\"1\","
-					+ "\"project_id\":\""+projectId+"\"}}";
+		HashMap<String, HashMap<String, String>> parameters = new HashMap<String, HashMap<String, String>>();
+		HashMap<String, String> repository = new HashMap<String, String>();
+		repository.put("name", "Repository"+(append++));
+		repository.put("address", "svn://svn.code.sf.net/p/qt-calculator/code/trunk");
+		repository.put("scm_type", "SVN");
+		repository.put("kalibro_configuration_id", "1");
+		repository.put("project_id", projectId.toString());
+		parameters.put("repository", repository);
+		JSONObject jsonBody = new JSONObject(parameters);
 		HttpResponse<JsonNode> response = Unirest.post(BASE_URI + PORT + REPOSITORY_PATH)
 				  .header("Content-Type", "application/json")
 				  .header("accept", "application/json")
-				  .body(body)
+				  .body(jsonBody.toString())
 				  .asJson();
 		repositoryId = ((JSONObject) (response.getBody().getObject().get("repository"))).get("id").toString();
 		return repositoryId;
