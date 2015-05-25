@@ -1,11 +1,15 @@
 package degradation;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.yaml.snakeyaml.Yaml;
 
 import support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -20,6 +24,7 @@ import eu.choreos.vv.increasefunctions.ScalabilityFunction;
 
 public class TestRunner {
 	
+	private static final String CONFIG_YML = "config.yml";
 	private static int requestsPerStep, numberOfSteps, initialValue, increaseFunctionParameter;
 	private static ScalabilityFunction increaseFunctionObject;
 	private static String increaseFunction, experimentName;
@@ -31,8 +36,16 @@ public class TestRunner {
 		throws Exception {
 		String requestMethod = args[0];
 		readParameters(args[1]);
-		configureExperiment();
+		Map<Object, Object> configParameters = extractConfigParameters();
+		configureExperiment(configParameters);
+		
 		startExperiment(plotGraph, experimentName, experimentSubject);
+	}
+
+	private static Map<Object, Object> extractConfigParameters() throws FileNotFoundException {
+		Map<Object, Object> yaml = (Map<Object, Object>) new Yaml().load(new FileInputStream(new File(CONFIG_YML)));
+		Map<Object, Object> configParameters = (Map<Object, Object>) yaml.get("kalibro_processor");
+		return configParameters;
 	}
 	
 	private static void readParameters(String filename)
@@ -65,8 +78,8 @@ public class TestRunner {
 		return Integer.parseInt(bufferedReader.readLine());
 	}
 	
-	private static void configureExperiment() throws Exception {
-		degradationTestRunner = new DegradationTestRunner(experimentSubject);
+	private static void configureExperiment(Map<Object, Object> configParameters) throws Exception {
+		degradationTestRunner = new DegradationTestRunner(experimentSubject, configParameters);
 		ExperimentStrategy experimentStrategy = new WorkloadScaling();
 		degradationTestRunner.setStrategy(experimentStrategy);
 	

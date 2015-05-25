@@ -1,5 +1,7 @@
 package degradation;
 
+import java.util.Map;
+
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.experiments.Experiment;
@@ -7,16 +9,11 @@ import eu.choreos.vv.experiments.Experiment;
 public class DegradationTestRunner extends Experiment<String, String> {
 	private RESTStrategy experimentSubject;
 	
-//	Use YML files to receive these constants.
-	private final String BASE_URI = "http://aguia1.ime.usp.br";
-	private final int PORT = 8082;
-	private final String BASE_PATH = "/";
 	static RSClient kalibroClient;
 	
-	public DegradationTestRunner(RESTStrategy experimentSubject) throws Exception {
+	public DegradationTestRunner(RESTStrategy experimentSubject, Map<Object, Object> configParameters) throws Exception {
 		this.experimentSubject = experimentSubject;
-		kalibroClient = new RSClient(BASE_URI, BASE_PATH, PORT);
-		
+		kalibroClient = new RSClient((String) configParameters.get("base_uri"), (String) configParameters.get("base_path"), (Integer) configParameters.get("port"));
 	}
 	
 	public RSClient getKalibroClient() {
