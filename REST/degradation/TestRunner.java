@@ -55,7 +55,9 @@ public class TestRunner {
 		}
 		plotGraph = Boolean.parseBoolean(bufferedReader.readLine());
 		experimentName = bufferedReader.readLine();
-		experimentSubject = (RESTStrategy) Class.forName("repositoryEndpoint."+StringUtils.capitalize(experimentName)).newInstance();
+		String[] splittedExperimentName = StringUtils.splitByCharacterTypeCamelCase(experimentName);
+		String endpointName = splittedExperimentName[splittedExperimentName.length-1].toLowerCase();
+		experimentSubject = (RESTStrategy) Class.forName(endpointName+"Endpoint."+StringUtils.capitalize(experimentName)).newInstance();
 		bufferedReader.close();
 	}
 	
