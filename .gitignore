@@ -1,2 +1,3 @@
 target/
-config.yml
+degradation_config.yml
+speedup_config.yml

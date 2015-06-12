@@ -118,6 +118,5 @@
 	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpclient-4.3.6.jar"/>
 	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpmime-4.3.6.jar"/>
 	<classpathentry kind="lib" path="/home/diego/Documents/mezuro/scalability_tests/bin/httpcore-nio-4.3.3.jar"/>
-	<classpathentry kind="lib" path="/home/diego/Downloads/snakeyaml-1.15.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

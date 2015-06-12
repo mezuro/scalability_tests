@@ -1,4 +1,4 @@
-package degradation;
+package speedup;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,26 +11,24 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import support.RESTKalibroDeployer;
 import support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
-import eu.choreos.vv.experiments.strategy.WorkloadScaling;
-import eu.choreos.vv.increasefunctions.ExponentialIncrease;
+import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
-import eu.choreos.vv.increasefunctions.QuadraticIncrease;
 import eu.choreos.vv.increasefunctions.ScalabilityFunction;
 
 public class TestRunner {
-	
-	private static final String CONFIG_YML = "degradation_config.yml";
-	private static int requestsPerStep, numberOfSteps, initialValue, increaseFunctionParameter;
+	private static final String CONFIG_YML = "speedup_config.yml";
+	private static int requestsPerStep, numberOfSteps, initialValue;
 	private static ScalabilityFunction increaseFunctionObject;
-	private static String increaseFunction, experimentName;
+	private static String experimentName;
 	private static boolean plotGraph;
 	private static RESTStrategy experimentSubject;
-	private static DegradationTestRunner degradationTestRunner;
+	private static SpeedupTestRunner speedupTestRunner;
 	
 	public static void main(String[] args)
 		throws Exception {
@@ -39,7 +37,12 @@ public class TestRunner {
 		Map<Object, Object> configParameters = extractConfigParameters();
 		configureExperiment(configParameters);
 		
-		startExperiment(plotGraph, experimentName, experimentSubject);
+		try {
+			startExperiment(plotGraph, experimentName, experimentSubject);
+		}
+		catch (Exception error) {
+			error.printStackTrace();
+		}
 	}
 
 	private static Map<Object, Object> extractConfigParameters() throws FileNotFoundException {
@@ -54,18 +57,9 @@ public class TestRunner {
 		requestsPerStep = readInteger(bufferedReader);
 		numberOfSteps = readInteger(bufferedReader);
 		initialValue = readInteger(bufferedReader);
-		increaseFunction = bufferedReader.readLine().toLowerCase();
-		increaseFunctionParameter = readInteger(bufferedReader);
 				
-		if (increaseFunction.startsWith("linear")) {
-			increaseFunctionObject = new LinearIncrease(increaseFunctionParameter);
-		} else if (increaseFunction.startsWith("exponential")) {
-			increaseFunctionObject = new ExponentialIncrease(increaseFunctionParameter);
-		} else if (increaseFunction.startsWith("quadratic")) {
-			increaseFunctionObject = new QuadraticIncrease(increaseFunctionParameter);
-		} else {
-			System.out.println("Wrong argument for increase function: " + increaseFunction + "\nExpected: linear, exponential or quadratic");
-		}
+		increaseFunctionObject = new LinearIncrease(1);
+		
 		plotGraph = Boolean.parseBoolean(bufferedReader.readLine());
 		experimentName = bufferedReader.readLine();
 		String[] splittedExperimentName = StringUtils.splitByCharacterTypeCamelCase(experimentName);
@@ -79,22 +73,24 @@ public class TestRunner {
 	}
 	
 	private static void configureExperiment(Map<Object, Object> configParameters) throws Exception {
-		degradationTestRunner = new DegradationTestRunner(experimentSubject, configParameters);
-		ExperimentStrategy experimentStrategy = new WorkloadScaling();
-		degradationTestRunner.setStrategy(experimentStrategy);
-	
-		degradationTestRunner.setNumberOfRequestsPerStep(requestsPerStep);
-		degradationTestRunner.setNumberOfSteps(numberOfSteps);
-		degradationTestRunner.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Aggregate Performance",
-			new MeanChartCreator())));
+		speedupTestRunner = new SpeedupTestRunner(experimentSubject, configParameters);
+		speedupTestRunner.setDeployer(new RESTKalibroDeployer());
 		
+		ExperimentStrategy experimentStrategy = new ParameterScaling("");
 		experimentStrategy.setParameterInitialValue(initialValue);
 		experimentStrategy.setFunction(increaseFunctionObject);
+		
+		speedupTestRunner.setStrategy(experimentStrategy);
+	
+		speedupTestRunner.setNumberOfRequestsPerStep(requestsPerStep);
+		speedupTestRunner.setNumberOfSteps(numberOfSteps);
+		speedupTestRunner.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Speedup Performance",
+			new MeanChartCreator())));
 	}
 	
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
 		throws Exception {
-		strategy.setRsClient(degradationTestRunner.getKalibroClient());
-		degradationTestRunner.run(label, plotGraph);
+		strategy.setRsClient(speedupTestRunner.getKalibroClient());
+		speedupTestRunner.run(label, plotGraph);
 	}
 }
