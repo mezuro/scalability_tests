@@ -1,3 +1,4 @@
 target/
 degradation_config.yml
 speedup_config.yml
+composed_aggregation_config.yml
