@@ -1,0 +1,22 @@
+type:
+	degradation
+requestsPerStep:
+	1
+numberOfSteps:
+	1
+initialCapacityValue:
+
+increaseCapacityFunction:
+
+increaseCapacityFunctionParameter:
+
+initialWorkloadValue:
+	2
+increaseWorkloadFunction:
+	linear increase
+increaseWorkloadFunctionParameter:
+	1
+plotGraph:
+	false
+experientName:
+	processRepository

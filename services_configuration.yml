@@ -1,0 +1,19 @@
+kalibro_processor:
+    base_uris:
+        - http://localhost:8080
+        - http://localhost:8081
+        - http://localhost:8082
+    port:
+        8082
+    base_path:
+        /
+
+kalibro_configuration:
+    base_uris:
+        - http://localhost:8180
+        - http://localhost:8181
+        - http://localhost:8182
+    port:
+        8182
+    base_path:
+        /
