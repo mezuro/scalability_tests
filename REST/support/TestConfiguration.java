@@ -1,11 +1,12 @@
 package support;
 
-import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.yaml.snakeyaml.Yaml;
 
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
@@ -13,7 +14,6 @@ import eu.choreos.vv.increasefunctions.QuadraticIncrease;
 import eu.choreos.vv.increasefunctions.ScalabilityFunction;
 
 public class TestConfiguration {
-	private static final String TEST_CONFIG_YML = "test_configuration.yml";
 	public static int requestsPerStep, numberOfSteps, initialCapacityValue, increaseCapacityFunctionParameter, initialWorkloadValue, increaseWorkloadFunctionParameter;
 	public static ScalabilityFunction increaseCapacityFunctionObject, increaseWorkloadFunctionObject;
 	public static String subjectName, increaseWorkloadFunction, increaseCapacityFunction;
@@ -26,26 +26,24 @@ public class TestConfiguration {
 
 	private static void readParameters(String filename)
 			throws FileNotFoundException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
-		metric = bufferedReader.readLine();
-		requestsPerStep = readInteger(bufferedReader);
-		numberOfSteps = readInteger(bufferedReader);
+		Map<Object, Object> parameters = (Map<Object, Object>) new Yaml().load(new FileInputStream(new File(filename)));
+		metric = (String) parameters.get("type");
+		requestsPerStep = (Integer) parameters.get("requestsPerStep");
+		numberOfSteps = (Integer) parameters.get("numberOfSteps");
 
-		initialCapacityValue = readInteger(bufferedReader);
-		increaseCapacityFunction = bufferedReader.readLine().toLowerCase();
-		increaseCapacityFunctionParameter = readInteger(bufferedReader);
+		initialCapacityValue = (Integer) parameters.get("initialCapacityValue");
+		increaseCapacityFunction = ((String) parameters.get("increaseCapacityFunction")).toLowerCase();
+		increaseCapacityFunctionParameter = (Integer) parameters.get("increaseCapacityFunctionParameter");
 
-		initialWorkloadValue = readInteger(bufferedReader);
-		increaseWorkloadFunction = bufferedReader.readLine().toLowerCase();
-		increaseWorkloadFunctionParameter = readInteger(bufferedReader);
+		initialWorkloadValue = (Integer) parameters.get("initialWorkloadValue");
+		increaseWorkloadFunction = ((String) parameters.get("increaseWorkloadFunction")).toLowerCase();
+		increaseWorkloadFunctionParameter = (Integer) parameters.get("increaseWorkloadFunctionParameter");
 				
 		increaseCapacityFunctionObject = getIncreaseFunction(increaseCapacityFunction, increaseCapacityFunctionParameter);
 		increaseWorkloadFunctionObject = getIncreaseFunction(increaseWorkloadFunction, increaseWorkloadFunctionParameter);
 		
-		plotGraph = Boolean.parseBoolean(bufferedReader.readLine());
-		subjectName = bufferedReader.readLine();
-		
-		bufferedReader.close();
+		plotGraph = (Boolean) parameters.get("plotGraph");
+		subjectName = (String) parameters.get("experientName");
 	}
 	
 	private static ScalabilityFunction getIncreaseFunction(String increaseFunction, int increaseFunctionParameter) {
@@ -60,9 +58,5 @@ public class TestConfiguration {
 			System.out.println("Wrong argument for increase function: " + increaseFunction + "\nExpected: linear, exponential or quadratic");
 		}
 		return increaseFunctionObject;
-	}
-	
-	private static int readInteger(BufferedReader bufferedReader) throws IOException {
-		return Integer.parseInt(bufferedReader.readLine());
 	}
 }
