@@ -7,7 +7,6 @@ import support.TestConfiguration;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
-import eu.choreos.vv.clientgenerator.RSClient;
 import eu.choreos.vv.experiments.strategy.ComposedStrategy;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
@@ -15,25 +14,14 @@ import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 
 public class ComposedAggregationExperiment extends KalibroExperiment {
 	
-	static RSClient kalibroClient;
-
 	public void setAttributes(TestConfiguration configuration, RESTStrategy subject) throws Exception {
 		super.setAttributes(configuration, subject);
-		setKalibroClient();
 		configureExperiment();
 	}
 	
-	public RSClient getKalibroClient() {
-		return kalibroClient;
-	}
-
-	public void beforeIteration() throws Exception {
-		super.subject.beforeStep();
-		setKalibroClient();
-	}
-
-	private void setKalibroClient() throws IndexOutOfBoundsException {
-		kalibroClient = new RSClient(baseUris.remove(0), basePath, port);
+	public void afterIteration() throws Exception {
+		super.subject.afterStep();
+		subject.changeToNextUrl();
 	}
 	
 	private void configureExperiment() throws Exception {

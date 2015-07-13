@@ -1,6 +1,7 @@
 package repositoryEndpoint;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -8,14 +9,11 @@ import support.RESTStrategy;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
 
 public class ProcessRepository extends RESTStrategy {
 
-	private final String BASE_URI = "http://localhost:";
-	private final String PORT = "8082";
-	private final String PROJECT_PATH = "/projects";
-	private final String REPOSITORY_PATH = "/repositories";
+	private final String PROJECT_PATH = "projects";
+	private final String REPOSITORY_PATH = "repositories";
 	private String projectId;
 	private String repositoryId;
 	private int append = 0;
@@ -27,11 +25,7 @@ public class ProcessRepository extends RESTStrategy {
 		project.put("name", "Project");
 		parameters.put("project", project);
 		JSONObject jsonBody = new JSONObject(parameters);
-		HttpResponse<JsonNode> response = Unirest.post(BASE_URI + PORT + PROJECT_PATH)
-				  .header("Content-Type", "application/json")
-				  .header("accept", "application/json")
-				  .body(jsonBody.toString())
-				  .asJson();
+		HttpResponse<JsonNode> response = post(buildUrl(PROJECT_PATH), jsonBody);
 		projectId = ((JSONObject) (response.getBody().getObject().get("project"))).get("id").toString();
 	}
 
@@ -46,41 +40,35 @@ public class ProcessRepository extends RESTStrategy {
 		repository.put("project_id", projectId.toString());
 		parameters.put("repository", repository);
 		JSONObject jsonBody = new JSONObject(parameters);
-		HttpResponse<JsonNode> response = Unirest.post(BASE_URI + PORT + REPOSITORY_PATH)
-				  .header("Content-Type", "application/json")
-				  .header("accept", "application/json")
-				  .body(jsonBody.toString())
-				  .asJson();
+		HttpResponse<JsonNode> response = post(buildUrl(REPOSITORY_PATH), jsonBody);
+
 		repositoryId = ((JSONObject) (response.getBody().getObject().get("repository"))).get("id").toString();
 		return repositoryId;
 	}
 //
 	@Override
 	public String request(String string) throws Exception {
-		Unirest.get(BASE_URI + PORT + REPOSITORY_PATH + "/" + repositoryId + "/process")
-				  .header("Content-Type", "application/json")
-				  .header("accept", "application/json")
-				  .asJson();
+		get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/process"));
 		return string;
 	}
 
 	@Override
 	public synchronized void afterRequest(String requestResponse) throws Exception {
 		Thread.sleep(1000);
-		while (Unirest.get(BASE_URI + PORT + REPOSITORY_PATH + "/" + repositoryId + "/has_ready_processing")
-				  .header("Content-Type", "application/json")
-				  .header("accept", "application/json")
-				  .asJson().getBody().getObject().get("has_ready_processing").equals("false")) {
+		while (get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/has_ready_processing"))
+				.getBody().getObject().get("has_ready_processing").equals("false")) {
 			Thread.sleep(1000);
 		}
 	}
 
 	@Override
 	public void afterExperiment() throws Exception {
-		Unirest.delete(BASE_URI + PORT + PROJECT_PATH + "/" + projectId)
-		  .header("Content-Type", "application/json")
-		  .header("accept", "application/json")
-		  .asJson();
+		delete(buildUrl(PROJECT_PATH + "/" + projectId));
+	}
+
+	@Override
+	public void configure(Map<Object, Object> options) {
+		configure(options, "kalibro_processor");
 	}
 
 }
