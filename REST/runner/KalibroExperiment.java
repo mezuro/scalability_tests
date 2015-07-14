@@ -14,7 +14,7 @@ public abstract class KalibroExperiment extends Experiment<String, String> {
 	}
 	
 	public void start() throws Exception {
-		this.run(this.configuration.subjectName, this.configuration.plotGraph);
+		this.run(this.configuration.getSubjectName(), this.configuration.isPlotGraph());
 	}
 
 	@Override

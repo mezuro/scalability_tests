@@ -21,10 +21,10 @@ public class TestRunner {
 		serviceConfiguration = (Map<Object, Object>) new Yaml().load(new FileInputStream(new File(SERVICES_CONFIG_YML)));
 		testConfiguration = new TestConfiguration(args[1]);
 		
-		initSubject(testConfiguration.subjectName);
+		initSubject(testConfiguration.getSubjectName());
 		subject.configure(serviceConfiguration);
 		
-		Class<?> experimentClass = Class.forName(testConfiguration.metric+"Experiment");
+		Class<?> experimentClass = Class.forName(testConfiguration.getMetric()+"Experiment");
 		experiment = (KalibroExperiment) experimentClass.newInstance();
 		experiment.setAttributes(testConfiguration, subject);
 		experiment.start();

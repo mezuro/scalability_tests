@@ -25,13 +25,13 @@ public class SpeedupExperiment extends KalibroExperiment {
 		this.setDeployer(new RESTKalibroDeployer());
 		
 		ExperimentStrategy experimentStrategy = new ParameterScaling("");
-		experimentStrategy.setParameterInitialValue(configuration.initialCapacityValue);
-		experimentStrategy.setFunction(configuration.increaseCapacityFunctionObject);
+		experimentStrategy.setParameterInitialValue(configuration.getInitialCapacityValue());
+		experimentStrategy.setFunction(configuration.getIncreaseCapacityFunctionObject());
 		
 		this.setStrategy(experimentStrategy);
 	
-		this.setNumberOfRequestsPerStep(configuration.requestsPerStep);
-		this.setNumberOfSteps(configuration.numberOfSteps);
+		this.setNumberOfRequestsPerStep(configuration.getRequestsPerStep());
+		this.setNumberOfSteps(configuration.getNumberOfSteps());
 		this.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Speedup Performance",
 			new MeanChartCreator())));
 	}

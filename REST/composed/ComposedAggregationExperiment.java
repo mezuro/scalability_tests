@@ -28,19 +28,19 @@ public class ComposedAggregationExperiment extends KalibroExperiment {
 		this.setDeployer(new RESTKalibroDeployer());
 		
 		ExperimentStrategy capacityStrategy = new ParameterScaling("");
-		capacityStrategy.setParameterInitialValue(configuration.initialCapacityValue);
-		capacityStrategy.setFunction(configuration.increaseCapacityFunctionObject);
+		capacityStrategy.setParameterInitialValue(configuration.getInitialCapacityValue());
+		capacityStrategy.setFunction(configuration.getIncreaseCapacityFunctionObject());
 		
 		ExperimentStrategy workloadStrategy = new WorkloadScaling();
-		workloadStrategy.setParameterInitialValue(configuration.initialWorkloadValue);
-		workloadStrategy.setFunction(configuration.increaseWorkloadFunctionObject);
+		workloadStrategy.setParameterInitialValue(configuration.getInitialWorkloadValue());
+		workloadStrategy.setFunction(configuration.getIncreaseWorkloadFunctionObject());
 
 		ExperimentStrategy composedStrategy = new ComposedStrategy(capacityStrategy, workloadStrategy);
 		
 		this.setStrategy(composedStrategy);
 	
-		this.setNumberOfRequestsPerStep(configuration.requestsPerStep);
-		this.setNumberOfSteps(configuration.numberOfSteps);
+		this.setNumberOfRequestsPerStep(configuration.getRequestsPerStep());
+		this.setNumberOfSteps(configuration.getNumberOfSteps());
 		this.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Composed Aggregation Performance",
 			new MeanChartCreator())));
 	}

@@ -19,12 +19,12 @@ public class DegradationExperiment extends KalibroExperiment {
 		ExperimentStrategy experimentStrategy = new WorkloadScaling();
 		this.setStrategy(experimentStrategy);
 	
-		this.setNumberOfRequestsPerStep(configuration.requestsPerStep);
-		this.setNumberOfSteps(configuration.numberOfSteps);
+		this.setNumberOfRequestsPerStep(configuration.getRequestsPerStep());
+		this.setNumberOfSteps(configuration.getNumberOfSteps());
 		this.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Aggregate Performance",
 			new MeanChartCreator())));
 		
-		experimentStrategy.setParameterInitialValue(configuration.initialWorkloadValue);
-		experimentStrategy.setFunction(configuration.increaseWorkloadFunctionObject);
+		experimentStrategy.setParameterInitialValue(configuration.getInitialWorkloadValue());
+		experimentStrategy.setFunction(configuration.getIncreaseWorkloadFunctionObject());
 	}
 }
