@@ -1,0 +1,11 @@
+type: speedup.Speedup
+requestsPerStep: 1
+numberOfSteps: 1
+initialCapacityValue: 2
+increaseCapacityFunction: linear increase
+increaseCapacityFunctionParameter: 1
+initialWorkloadValue:
+increaseWorkloadFunction:	
+increaseWorkloadFunctionParameter:	
+plotGraph: false
+experientName: processRepository
