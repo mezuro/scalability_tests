@@ -1,8 +1,6 @@
-package REST.degradation;
+package core;
 
-import REST.runner.KalibroExperiment;
 import REST.support.RESTStrategy;
-import REST.support.TestConfiguration;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.chart.creator.MeanChartCreator;

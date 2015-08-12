@@ -1,7 +1,6 @@
-package REST.runner;
+package core;
 
 import REST.support.RESTStrategy;
-import REST.support.TestConfiguration;
 import eu.choreos.vv.experiments.Experiment;
 
 public abstract class KalibroExperiment extends Experiment<String, String> {

@@ -1,9 +1,7 @@
-package REST.composed;
+package core;
 
-import REST.runner.KalibroExperiment;
 import REST.support.RESTKalibroDeployer;
 import REST.support.RESTStrategy;
-import REST.support.TestConfiguration;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
