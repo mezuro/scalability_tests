@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.clientgenerator.RSClient;
+import strategy.RESTStrategy;
 
 public class DeleteRange extends RESTStrategy {
 
@@ -54,7 +54,7 @@ public class DeleteRange extends RESTStrategy {
 	}
 
 	@Override
-	public void beforeStep() throws Exception {
+	public void beforeIteration() throws Exception {
 		for (int cont = 0; cont < requestsPerStep; cont++) {
 			Item saveRange = new ItemImpl("saveRange");
 			Item range = saveRange.addChild("range");
@@ -82,7 +82,7 @@ public class DeleteRange extends RESTStrategy {
 	}
 
 	@Override
-	public void afterStep() throws Exception {
+	public void afterIteration() throws Exception {
 		errors.add(step);
 		step = 0;
 	}

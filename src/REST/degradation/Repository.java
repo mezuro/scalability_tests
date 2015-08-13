@@ -1,7 +1,6 @@
 package REST.degradation;
 
 import REST.repositoryEndpoint.ProcessRepository;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
@@ -10,6 +9,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class Repository extends Experiment<String, String> {
 
@@ -46,12 +46,12 @@ public class Repository extends Experiment<String, String> {
 
 	@Override
 	public void afterIteration() throws Exception {
-		repositoryStrategy.afterStep();
+		repositoryStrategy.afterIteration();
 	}
 
 	@Override
 	public void beforeIteration() throws Exception {
-		repositoryStrategy.beforeStep();
+		repositoryStrategy.beforeIteration();
 	}
 
 	@Override

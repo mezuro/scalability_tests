@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import REST.support.RESTStrategy;
-
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+
+import strategy.RESTStrategy;
 
 public class ProcessRepository extends RESTStrategy {
 

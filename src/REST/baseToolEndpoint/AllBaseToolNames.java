@@ -1,7 +1,7 @@
 package REST.baseToolEndpoint;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
+import strategy.RESTStrategy;
 
 public class AllBaseToolNames extends RESTStrategy {
 

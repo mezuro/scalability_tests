@@ -1,7 +1,7 @@
 package REST.metricConfigurationEndpoint;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
+import strategy.RESTStrategy;
 
 public class MetricConfigurationsOf extends RESTStrategy {
 

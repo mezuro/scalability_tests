@@ -7,7 +7,6 @@ import SOAP.readingEndpoint.GetSOAPReading;
 import SOAP.readingEndpoint.SOAPReadingsOf;
 import SOAP.readingEndpoint.SaveSOAPReading;
 import SOAP.support.SOAPKalibroDeployer;
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -18,6 +17,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.SOAPStrategy;
 
 public class SOAPReading extends Experiment<Item, Item> {
 

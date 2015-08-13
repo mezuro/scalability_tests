@@ -1,9 +1,11 @@
-package SOAP.support;
+package strategy;
+
+import java.util.Map;
 
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.WSClient;
 
-public abstract class SOAPStrategy {
+public abstract class SOAPStrategy implements Strategy<Item> {
 
 	protected WSClient wsClient;
 
@@ -26,4 +28,8 @@ public abstract class SOAPStrategy {
 	public void beforeExperiment() throws Exception {}
 
 	public void afterExperiment() throws Exception {}
+
+	public void configure(Map<Object, Object> serviceConfiguration) {
+		// TODO Auto-generated method stub
+	}
 }

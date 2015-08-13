@@ -1,9 +1,9 @@
 package REST.rangeEndpoint;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.clientgenerator.RSClient;
+import strategy.RESTStrategy;
 
 public class RangesOf extends RESTStrategy {
 

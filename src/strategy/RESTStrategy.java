@@ -1,4 +1,4 @@
-package REST.support;
+package strategy;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
-public abstract class RESTStrategy {
+public abstract class RESTStrategy implements Strategy<String>{
 
 	protected List<String> urls;
 	protected String basePath;
@@ -37,6 +37,24 @@ public abstract class RESTStrategy {
 		}
 	}
 
+	public void beforeExperiment() throws Exception {}
+
+	public void beforeIteration() throws Exception {}
+
+	public String beforeRequest() throws Exception {
+		return null;
+	}
+
+	public abstract String request(String string) throws Exception;
+
+	public void afterRequest(String requestResponse) throws Exception {}
+
+	public void afterIteration() throws Exception {}
+
+	public void afterExperiment() throws Exception {}
+
+	public abstract void configure(Map<Object, Object> options);
+
 	public HttpResponse<JsonNode> get(String url) throws Exception {
 		return Unirest.get(url)
 				.header("Content-Type", "application/json")
@@ -58,22 +76,4 @@ public abstract class RESTStrategy {
 				.header("accept", "application/json")
 				.asJson();
 	}
-
-	public abstract void configure(Map<Object, Object> options);
-
-	public abstract String request(String string) throws Exception;
-
-	public String beforeRequest() throws Exception {
-		return null;
-	}
-
-	public void afterRequest(String requestResponse) throws Exception {}
-
-	public void afterStep() throws Exception {}
-
-	public void beforeStep() throws Exception {}
-
-	public void beforeExperiment() throws Exception {}
-
-	public void afterExperiment() throws Exception {}
 }

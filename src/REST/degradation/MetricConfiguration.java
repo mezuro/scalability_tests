@@ -6,7 +6,6 @@ import REST.metricConfigurationEndpoint.DeleteMetricConfiguration;
 import REST.metricConfigurationEndpoint.GetMetricConfiguration;
 import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
 import REST.metricConfigurationEndpoint.SaveMetricConfiguration;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -18,6 +17,7 @@ import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class MetricConfiguration extends Experiment<Item, Item> {
 
@@ -57,12 +57,12 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 
 	@Override
 	public void afterIteration() throws Exception {
-		metricConfigurationStrategy.afterStep();
+		metricConfigurationStrategy.afterIteration();
 	}
 
 	@Override
 	public void beforeIteration() throws Exception {
-		metricConfigurationStrategy.beforeStep();
+		metricConfigurationStrategy.beforeIteration();
 	}
 
 	@Override

@@ -1,9 +1,9 @@
 package REST.metricResultEndpoint;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.clientgenerator.RSClient;
+import strategy.RESTStrategy;
 
 public class HistoryOfMetric extends RESTStrategy {
 

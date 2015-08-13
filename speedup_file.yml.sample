@@ -1,4 +1,4 @@
-type: speedup.Speedup
+type: Speedup
 requestsPerStep: 1
 numberOfSteps: 1
 initialCapacityValue: 2

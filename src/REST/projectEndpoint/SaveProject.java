@@ -3,11 +3,11 @@ package REST.projectEndpoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.exceptions.FrameworkException;
 import eu.choreos.vv.exceptions.InvalidOperationNameException;
+import strategy.RESTStrategy;
 
 public class SaveProject extends RESTStrategy {
 
@@ -46,12 +46,12 @@ public class SaveProject extends RESTStrategy {
 	}
 
 	@Override
-	public void beforeStep() {
+	public void beforeIteration() {
 		idList.clear();
 	}
 
 	@Override
-	public void afterStep() throws InvalidOperationNameException, FrameworkException {
+	public void afterIteration() throws InvalidOperationNameException, FrameworkException {
 		for (String id : idList) {
 			rsClient.request("deleteProject", id);
 		}

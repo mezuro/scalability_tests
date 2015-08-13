@@ -1,9 +1,9 @@
 package SOAP.processingEndpoint;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.clientgenerator.WSClient;
+import strategy.SOAPStrategy;
 
 public class LastReadySOAPProcessing extends SOAPStrategy {
 

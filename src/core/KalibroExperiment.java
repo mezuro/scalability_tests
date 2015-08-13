@@ -1,13 +1,13 @@
 package core;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.experiments.Experiment;
+import strategy.Strategy;
 
-public abstract class KalibroExperiment extends Experiment<String, String> {
-	protected RESTStrategy subject;
+public abstract class KalibroExperiment<T> extends Experiment<T, T> {
+	protected Strategy<T> subject;
 	protected TestConfiguration configuration;
 	
-	protected void setAttributes(TestConfiguration configuration, RESTStrategy subject) throws Exception {
+	protected void setAttributes(TestConfiguration configuration, Strategy<T> subject) throws Exception {
 		this.configuration = configuration;
 		this.subject = subject;
 	}
@@ -26,29 +26,28 @@ public abstract class KalibroExperiment extends Experiment<String, String> {
 		subject.afterExperiment();
 	}
 
-	// FIXME: methods with the same name 
 	@Override
 	public void beforeIteration() throws Exception {
-		subject.beforeStep();
+		subject.beforeIteration();
 	}
 	
 	@Override
 	public void afterIteration() throws Exception {
-		subject.afterStep();
+		subject.afterIteration();
 	}
 	
 	@Override
-	public String beforeRequest() throws Exception {
+	public T beforeRequest() throws Exception {
 		return subject.beforeRequest();
 	}
 
 	@Override
-	public String request(String string) throws Exception {
-		return subject.request(string);
+	public T request(T item) throws Exception {
+		return subject.request(item);
 	}
 	
 	@Override
-	public void afterRequest(String requestResponse) throws Exception {
+	public void afterRequest(T requestResponse) throws Exception {
 		subject.afterRequest(requestResponse);
 	}
 }

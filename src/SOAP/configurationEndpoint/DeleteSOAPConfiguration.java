@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.clientgenerator.WSClient;
+import strategy.SOAPStrategy;
 
 public class DeleteSOAPConfiguration extends SOAPStrategy {
 

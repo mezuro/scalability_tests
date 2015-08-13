@@ -1,9 +1,9 @@
 package REST.projectEndpoint;
 
-import REST.support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.exceptions.FrameworkException;
 import eu.choreos.vv.exceptions.InvalidOperationNameException;
+import strategy.RESTStrategy;
 
 public class AllProjects extends RESTStrategy {
 

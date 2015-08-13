@@ -8,7 +8,6 @@ import REST.projectEndpoint.GetProject;
 import REST.projectEndpoint.ProjectExists;
 import REST.projectEndpoint.SaveProject;
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -22,6 +21,7 @@ import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class Project extends Experiment<Item, Item> {
 
@@ -50,7 +50,7 @@ public class Project extends Experiment<Item, Item> {
 
 	@Override
 	public void afterIteration() throws Exception {
-		projectStrategy.afterStep();
+		projectStrategy.afterIteration();
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class Project extends Experiment<Item, Item> {
 
 	@Override
 	public void beforeIteration() throws Exception {
-		projectStrategy.beforeStep();
+		projectStrategy.beforeIteration();
 		projectStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Project").get(0)));
 	}
 

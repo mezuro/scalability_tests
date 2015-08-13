@@ -3,7 +3,6 @@ package SOAP.degradation;
 import java.io.File;
 
 import SOAP.repositoryEndpoint.ProcessSOAPRepository;
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -14,6 +13,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.SOAPStrategy;
 
 public class SOAPRepository extends Experiment<Item, Item> {
 

@@ -3,7 +3,6 @@ package REST.speedup;
 import java.io.File;
 
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import REST.configurationEndpoint.AllConfigurations;
 import REST.configurationEndpoint.ConfigurationExists;
 import REST.configurationEndpoint.DeleteConfiguration;
@@ -19,6 +18,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class Configuration extends Experiment<Item, Item> {
 
@@ -42,13 +42,13 @@ public class Configuration extends Experiment<Item, Item> {
 
 	@Override
 	public void beforeIteration() throws Exception {
-		configurationStrategy.beforeStep();
+		configurationStrategy.beforeIteration();
 		configurationStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Configuration").get(0)));
 	}
 
 	@Override
 	public void afterIteration() throws Exception {
-		configurationStrategy.afterStep();
+		configurationStrategy.afterIteration();
 	}
 
 	@Override

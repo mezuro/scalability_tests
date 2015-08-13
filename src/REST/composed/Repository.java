@@ -4,7 +4,6 @@ import java.io.File;
 
 import REST.repositoryEndpoint.ProcessRepository;
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -18,6 +17,7 @@ import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class Repository extends Experiment<Item, Item> {
 
@@ -46,7 +46,7 @@ public class Repository extends Experiment<Item, Item> {
 
 	@Override
 	public void afterIteration() throws Exception {
-		repositoryStrategy.afterStep();
+		repositoryStrategy.afterIteration();
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class Repository extends Experiment<Item, Item> {
 
 	@Override
 	public void beforeIteration() throws Exception {
-		repositoryStrategy.beforeStep();
+		repositoryStrategy.beforeIteration();
 		repositoryStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Repository").get(0)));
 	}
 

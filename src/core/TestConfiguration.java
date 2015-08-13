@@ -23,26 +23,42 @@ public class TestConfiguration {
 		readParameters(filename);
 	}
 
+	private Integer getInteger(Map<Object, Object> parameters, String key) {
+		Object result = parameters.get(key);
+		if (result != null)
+			return (Integer)result;
+
+		return 0;
+	}
+
+	private String getString(Map<Object, Object> parameters, String key) {
+		Object result = parameters.get(key);
+		if (result != null)
+			return (String)result;
+
+		return "";
+	}
+
 	private void readParameters(String filename)
 			throws FileNotFoundException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Map<Object, Object> parameters = (Map<Object, Object>) new Yaml().load(new FileInputStream(new File(filename)));
 		metric = (String) parameters.get("type");
-		requestsPerStep = (Integer) parameters.get("requestsPerStep");
-		numberOfSteps = (Integer) parameters.get("numberOfSteps");
+		requestsPerStep = getInteger(parameters, "requestsPerStep");
+		numberOfSteps = getInteger(parameters, "numberOfSteps");
 
-		initialCapacityValue = (Integer) parameters.get("initialCapacityValue");
-		increaseCapacityFunction = ((String) parameters.get("increaseCapacityFunction")).toLowerCase();
-		increaseCapacityFunctionParameter = (Integer) parameters.get("increaseCapacityFunctionParameter");
+		initialCapacityValue = getInteger(parameters, "initialCapacityValue");
+		increaseCapacityFunction = getString(parameters, "increaseCapacityFunction").toLowerCase();
+		increaseCapacityFunctionParameter = getInteger(parameters, "increaseCapacityFunctionParameter");
 
-		initialWorkloadValue = (Integer) parameters.get("initialWorkloadValue");
-		increaseWorkloadFunction = ((String) parameters.get("increaseWorkloadFunction")).toLowerCase();
-		increaseWorkloadFunctionParameter = (Integer) parameters.get("increaseWorkloadFunctionParameter");
+		initialWorkloadValue = getInteger(parameters, "initialWorkloadValue");
+		increaseWorkloadFunction = getString(parameters, "increaseWorkloadFunction").toLowerCase();
+		increaseWorkloadFunctionParameter = getInteger(parameters, "increaseWorkloadFunctionParameter");
 				
 		increaseCapacityFunctionObject = getIncreaseFunction(increaseCapacityFunction, increaseCapacityFunctionParameter);
 		increaseWorkloadFunctionObject = getIncreaseFunction(increaseWorkloadFunction, increaseWorkloadFunctionParameter);
 		
 		plotGraph = (Boolean) parameters.get("plotGraph");
-		subjectName = (String) parameters.get("experientName");
+		subjectName = getString(parameters, "experientName");
 	}
 	
 	private ScalabilityFunction getIncreaseFunction(String increaseFunction, int increaseFunctionParameter) {

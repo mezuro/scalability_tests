@@ -1,7 +1,7 @@
 package SOAP.repositoryEndpoint;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
+import strategy.SOAPStrategy;
 
 public class SupportedSOAPRepositoryTypes extends SOAPStrategy {
 

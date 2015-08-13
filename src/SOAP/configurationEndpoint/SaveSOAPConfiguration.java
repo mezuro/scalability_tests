@@ -3,11 +3,11 @@ package SOAP.configurationEndpoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.clientgenerator.ItemImpl;
 import eu.choreos.vv.exceptions.FrameworkException;
 import eu.choreos.vv.exceptions.InvalidOperationNameException;
+import strategy.SOAPStrategy;
 
 public class SaveSOAPConfiguration extends SOAPStrategy {
 

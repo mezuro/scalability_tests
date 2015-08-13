@@ -5,7 +5,6 @@ import java.io.File;
 import REST.metricResultEndpoint.DescendantResultsOf;
 import REST.metricResultEndpoint.HistoryOfMetric;
 import REST.metricResultEndpoint.MetricResultsOf;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -17,6 +16,7 @@ import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class MetricResult extends Experiment<Item, Item> {
 
@@ -55,12 +55,12 @@ public class MetricResult extends Experiment<Item, Item> {
 
 	@Override
 	public void afterIteration() throws Exception {
-		metricResultStrategy.afterStep();
+		metricResultStrategy.afterIteration();
 	}
 
 	@Override
 	public void beforeIteration() throws Exception {
-		metricResultStrategy.beforeStep();
+		metricResultStrategy.beforeIteration();
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package SOAP.speedup;
 import java.io.File;
 
 import SOAP.support.SOAPKalibroDeployer;
-import SOAP.support.SOAPStrategy;
 import SOAP.configurationEndpoint.AllSOAPConfigurations;
 import SOAP.configurationEndpoint.SOAPConfigurationExists;
 import SOAP.configurationEndpoint.DeleteSOAPConfiguration;
@@ -19,6 +18,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.SOAPStrategy;
 
 public class SOAPConfiguration extends Experiment<Item, Item> {
 

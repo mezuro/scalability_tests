@@ -1,9 +1,9 @@
 package SOAP.projectEndpoint;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
 import eu.choreos.vv.exceptions.FrameworkException;
 import eu.choreos.vv.exceptions.InvalidOperationNameException;
+import strategy.SOAPStrategy;
 
 public class AllSOAPProjects extends SOAPStrategy {
 

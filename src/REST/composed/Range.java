@@ -6,7 +6,6 @@ import REST.rangeEndpoint.DeleteRange;
 import REST.rangeEndpoint.RangesOf;
 import REST.rangeEndpoint.SaveRange;
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -20,6 +19,7 @@ import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class Range extends Experiment<Item, Item> {
 
@@ -48,7 +48,7 @@ public class Range extends Experiment<Item, Item> {
 
 	@Override
 	public void afterIteration() throws Exception {
-		rangeStrategy.afterStep();
+		rangeStrategy.afterIteration();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Range extends Experiment<Item, Item> {
 
 	@Override
 	public void beforeIteration() throws Exception {
-		rangeStrategy.beforeStep();
+		rangeStrategy.beforeIteration();
 		rangeStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Range").get(0)));
 	}
 

@@ -3,7 +3,6 @@ package REST.speedup;
 import java.io.File;
 
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import REST.baseToolEndpoint.AllBaseToolNames;
 import REST.baseToolEndpoint.GetBaseTool;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -16,6 +15,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class BaseTool extends Experiment<Item, Item> {
 

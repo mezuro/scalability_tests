@@ -1,21 +1,21 @@
 package core;
 
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.chart.creator.MeanChartCreator;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
+import strategy.Strategy;
 
-public class SpeedupExperiment extends KalibroExperiment {	
-	public void setAttributes(TestConfiguration configuration, RESTStrategy subject) throws Exception {
+public class SpeedupExperiment<T> extends KalibroExperiment<T> {
+	public void setAttributes(TestConfiguration configuration, Strategy<T> subject) throws Exception {
 		super.setAttributes(configuration, subject);
 		configureExperiment();
 	}
 	
 	public void afterIteration() throws Exception {
-		super.subject.afterStep();
+		super.subject.afterIteration();
 		subject.changeToNextUrl();
 	}
 	

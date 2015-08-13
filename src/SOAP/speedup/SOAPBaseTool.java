@@ -3,7 +3,6 @@ package SOAP.speedup;
 import java.io.File;
 
 import SOAP.support.SOAPKalibroDeployer;
-import SOAP.support.SOAPStrategy;
 import SOAP.baseToolEndpoint.SOAPAllBaseToolNames;
 import SOAP.baseToolEndpoint.SOAPGetBaseTool;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -16,6 +15,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.SOAPStrategy;
 
 public class SOAPBaseTool extends Experiment<Item, Item> {
 

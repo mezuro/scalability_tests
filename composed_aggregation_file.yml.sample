@@ -1,4 +1,4 @@
-type: composed.ComposedAggregation
+type: ComposedAggregation
 requestsPerStep: 1
 numberOfSteps: 1
 initialCapacityValue: 1

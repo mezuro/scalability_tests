@@ -13,7 +13,6 @@ import REST.processingEndpoint.LastProcessingBefore;
 import REST.processingEndpoint.LastProcessingState;
 import REST.processingEndpoint.LastReadyProcessing;
 import REST.support.RESTKalibroDeployer;
-import REST.support.RESTStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -24,6 +23,7 @@ import eu.choreos.vv.experiments.Experiment;
 import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
 import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.RESTStrategy;
 
 public class Processing extends Experiment<Item, Item> {
 

@@ -7,7 +7,6 @@ import SOAP.metricConfigurationEndpoint.GetSOAPMetricConfiguration;
 import SOAP.metricConfigurationEndpoint.SOAPMetricConfigurationsOf;
 import SOAP.metricConfigurationEndpoint.SaveSOAPMetricConfiguration;
 import SOAP.support.SOAPKalibroDeployer;
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -21,6 +20,7 @@ import eu.choreos.vv.experiments.strategy.ParameterScaling;
 import eu.choreos.vv.experiments.strategy.WorkloadScaling;
 import eu.choreos.vv.increasefunctions.ExponentialIncrease;
 import eu.choreos.vv.increasefunctions.LinearIncrease;
+import strategy.SOAPStrategy;
 
 public class SOAPMetricConfiguration extends Experiment<Item, Item> {
 

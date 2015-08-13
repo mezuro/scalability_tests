@@ -1,7 +1,7 @@
 package SOAP.metricConfigurationEndpoint;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
+import strategy.SOAPStrategy;
 
 public class SOAPMetricConfigurationsOf extends SOAPStrategy {
 

@@ -1,7 +1,7 @@
 package SOAP.configurationEndpoint;
 
-import SOAP.support.SOAPStrategy;
 import eu.choreos.vv.clientgenerator.Item;
+import strategy.SOAPStrategy;
 
 public class GetSOAPConfiguration extends SOAPStrategy {
 
