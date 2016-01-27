@@ -33,11 +33,12 @@ public class FirstProcessing extends RESTStrategy {
 
 		get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/process"));
 
-		Thread.sleep(1000);
-		while (get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/has_ready_processing"))
-				.getBody().getObject().get("has_ready_processing").equals("false")) {
+		boolean hasReadyProcessing;
+		do {
 			Thread.sleep(1000);
-		}
+			hasReadyProcessing = get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/has_ready_processing"))
+					.getBody().getObject().getBoolean("has_ready_processing");
+		} while(!hasReadyProcessing);
 	}
 
 	@Override

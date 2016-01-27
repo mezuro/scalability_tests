@@ -4,11 +4,11 @@ import java.io.File;
 
 import REST.processingEndpoint.FirstProcessingAfter;
 import REST.processingEndpoint.HasProcessingAfter;
-import REST.processingEndpoint.HasProcessingBefore;
 import REST.processingEndpoint.LastProcessing;
 import REST.processingEndpoint.LastProcessingBefore;
 import REST.repositoryEndpoint.FirstProcessing;
 import REST.repositoryEndpoint.HasProcessing;
+import REST.repositoryEndpoint.HasProcessingInTime;
 import REST.repositoryEndpoint.HasReadyProcessing;
 import REST.repositoryEndpoint.LastProcessingState;
 import REST.repositoryEndpoint.LastReadyProcessing;
@@ -74,7 +74,7 @@ public class Processing extends Experiment<Item, Item> {
 		startExperiment(false, "firstProcessingAfter", new FirstProcessingAfter());
 		startExperiment(false, "hasProcessing", new HasProcessing());
 		startExperiment(false, "hasProcessingAfter", new HasProcessingAfter());
-		startExperiment(false, "hasProcessingBefore", new HasProcessingBefore());
+		startExperiment(false, "hasProcessingBefore", new HasProcessingInTime());
 		startExperiment(false, "hasReadyProcessing", new HasReadyProcessing());
 		startExperiment(false, "lastProcessing", new LastProcessing());
 		startExperiment(false, "lastProcessingBefore", new LastProcessingBefore());
