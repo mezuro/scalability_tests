@@ -4,7 +4,6 @@ import java.io.File;
 
 import REST.processingEndpoint.FirstProcessing;
 import REST.processingEndpoint.FirstProcessingAfter;
-import REST.processingEndpoint.HasProcessing;
 import REST.processingEndpoint.HasProcessingAfter;
 import REST.processingEndpoint.HasProcessingBefore;
 import REST.processingEndpoint.HasReadyProcessing;
@@ -12,6 +11,7 @@ import REST.processingEndpoint.LastProcessing;
 import REST.processingEndpoint.LastProcessingBefore;
 import REST.processingEndpoint.LastProcessingState;
 import REST.processingEndpoint.LastReadyProcessing;
+import REST.repositoryEndpoint.HasProcessing;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
