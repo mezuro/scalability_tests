@@ -12,12 +12,9 @@ import strategy.RESTStrategy;
 
 public class DeleteRepository extends RESTStrategy {
 
-	private final String PROJECT_PATH = "projects";
-	private final String REPOSITORY_PATH = "repositories";
 	private String projectId;
 	private String repositoryId;
 	private int append = 0;
-
 
 	@Override
 	public void beforeExperiment() throws Exception {

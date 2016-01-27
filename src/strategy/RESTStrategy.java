@@ -11,6 +11,9 @@ import com.mashape.unirest.http.Unirest;
 
 public abstract class RESTStrategy implements Strategy<String>{
 
+	protected final String REPOSITORY_PATH = "repositories";
+	protected final String PROJECT_PATH = "projects";
+
 	protected List<String> urls;
 	protected String basePath;
 	protected int currentUrlIndex;

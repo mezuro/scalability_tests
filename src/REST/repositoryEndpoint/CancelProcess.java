@@ -12,8 +12,6 @@ import strategy.RESTStrategy;
 
 public class CancelProcess extends RESTStrategy {
 
-	private final String PROJECT_PATH = "projects";
-	private final String REPOSITORY_PATH = "repositories";
 	private String projectId;
 	private String repositoryId;
 

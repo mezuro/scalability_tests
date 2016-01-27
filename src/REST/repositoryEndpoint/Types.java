@@ -5,8 +5,6 @@ import java.util.Map;
 import strategy.RESTStrategy;
 
 public class Types extends RESTStrategy {
-	private final String REPOSITORY_PATH = "repositories";
-	
 	@Override
 	public String request(String string) throws Exception {
 		get(buildUrl(REPOSITORY_PATH + "/types"));
