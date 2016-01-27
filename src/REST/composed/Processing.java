@@ -2,12 +2,12 @@ package REST.composed;
 
 import java.io.File;
 
-import REST.processingEndpoint.FirstProcessing;
 import REST.processingEndpoint.FirstProcessingAfter;
 import REST.processingEndpoint.HasProcessingAfter;
 import REST.processingEndpoint.HasProcessingBefore;
 import REST.processingEndpoint.LastProcessing;
 import REST.processingEndpoint.LastProcessingBefore;
+import REST.repositoryEndpoint.FirstProcessing;
 import REST.repositoryEndpoint.HasProcessing;
 import REST.repositoryEndpoint.HasReadyProcessing;
 import REST.repositoryEndpoint.LastProcessingState;

@@ -1,7 +1,11 @@
 package REST.repositoryEndpoint;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.json.JSONObject;
 
@@ -10,7 +14,7 @@ import com.mashape.unirest.http.JsonNode;
 
 import strategy.RESTStrategy;
 
-public class LastReadyProcessing extends RESTStrategy {
+public class FirstProcessing extends RESTStrategy {
 
 	private String repositoryId;
 
@@ -38,8 +42,18 @@ public class LastReadyProcessing extends RESTStrategy {
 
 	@Override
 	public String request(String string) throws Exception {
-		get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/last_ready_processing"));
+		HashMap<String, String> parameters = new HashMap<String, String>();
+		parameters.put("date", now());
+		JSONObject jsonBody = new JSONObject(parameters);
+		post(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/first_processing/after"), jsonBody);
 		return repositoryId;
+	}
+
+	private String now() {
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+		df.setTimeZone(tz);
+		return df.format(new Date());
 	}
 
 	@Override

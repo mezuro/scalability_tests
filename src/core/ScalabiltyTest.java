@@ -39,8 +39,16 @@ public class ScalabiltyTest {
 	}
 
 	private static Class<?> initSubject(String subjectName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		String className = null;
 		String[] splittedSubjectName = StringUtils.splitByCharacterTypeCamelCase(subjectName);
-		String endpointName = splittedSubjectName[splittedSubjectName.length-1].toLowerCase();
-		return Class.forName(architecture+"."+endpointName+"Endpoint."+StringUtils.capitalize(subjectName));
+
+		if(splittedSubjectName.length > 1)
+			className = subjectName;
+		else {
+			String endpointName = splittedSubjectName[splittedSubjectName.length-1].toLowerCase();
+			className = architecture + "." + endpointName + "Endpoint." + StringUtils.capitalize(subjectName);
+		}
+
+		return Class.forName(className);
 	}
 }
