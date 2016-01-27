@@ -1,92 +1,68 @@
 package REST.repositoryEndpoint;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import eu.choreos.vv.clientgenerator.Item;
-import eu.choreos.vv.clientgenerator.ItemImpl;
-import eu.choreos.vv.clientgenerator.RSClient;
-import eu.choreos.vv.exceptions.FrameworkException;
-import eu.choreos.vv.exceptions.InvalidOperationNameException;
+import org.json.JSONObject;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+
 import strategy.RESTStrategy;
 
 public class SaveRepository extends RESTStrategy {
 
-	private final String PROJECT_WSDL = "http://10.0.0.12:8080/KalibroService/ProjectEndpoint/?wsdl";
-	private static RSClient projectClient;
-	private Item requestProjectResponse;
-	private ItemImpl saveProject;
-	private List<String> idList;
-	private int step = 0;
-	private List<Integer> errors;
+	private final String PROJECT_PATH = "projects";
+	private final String REPOSITORY_PATH = "repositories";
+	private String projectId;
+	private String repositoryId;
 	private int append = 0;
-
+	HashMap<String, String> repository;
+	
 	@Override
 	public void beforeExperiment() throws Exception {
-		saveProject = new ItemImpl("saveProject");
-		Item project = saveProject.addChild("project");
-		project.addChild("id").setContent("");
-		project.addChild("description").setContent("Description");
-		project.addChild("name").setContent("c123235");
-		requestProjectResponse = projectClient.request("saveProject", saveProject);
+		HashMap<String, HashMap<String, String>> parameters = new HashMap<String, HashMap<String, String>>();
+		HashMap<String, String> project = new HashMap<String, String>();
+		project.put("name", "Project");
+		parameters.put("project", project);
+		JSONObject jsonBody = new JSONObject(parameters);
+		HttpResponse<JsonNode> response = post(buildUrl(PROJECT_PATH), jsonBody);
+		projectId = ((JSONObject) (response.getBody().getObject().get("project"))).get("id").toString();
+	}
+	
+	@Override
+	public String beforeRequest() throws Exception {
+		repository = new HashMap<String, String>();
+		repository.put("name", "Repository"+(append++));
+		repository.put("address", "svn://svn.code.sf.net/p/qt-calculator/code/trunk");
+		repository.put("scm_type", "SVN");
+		repository.put("kalibro_configuration_id", "1");
+		repository.put("project_id", projectId.toString());
+		return null;
 	}
 
 	@Override
-	public Item beforeRequest() throws Exception {
-		Item saveRepository = new ItemImpl("saveRepository");
-		Item repository = saveRepository.addChild("repository");
-		repository.addChild("id").setContent("");
-		repository.addChild("address").setContent("svn://svn.code.sf.net/p/qt-calculator/code/trunk");
-		repository.addChild("processPeriod").setContent("0");
-		repository.addChild("description").setContent("desc");
-		repository.addChild("name").setContent("name" + append++);
-		repository.addChild("type").setContent("SUBVERSION");
-		repository.addChild("license").setContent("GPL");
-		repository.addChild("configurationId").setContent("1");
-		saveRepository.addChild("projectId").setContent(requestProjectResponse.getContent("projectId"));
-		return saveRepository;
-	}
-
-	public SaveRepository() throws Exception {
-		projectClient = new RSClient(PROJECT_WSDL);
-		idList = new ArrayList<String>();
-		errors = new ArrayList<Integer>();
+	public String request(String saveRepository) throws Exception {
+		HashMap<String, HashMap<String, String>> parameters = new HashMap<String, HashMap<String, String>>();
+		parameters.put("repository", repository);
+		JSONObject jsonBody = new JSONObject(parameters);
+		HttpResponse<JsonNode> response = post(buildUrl(REPOSITORY_PATH), jsonBody);
+		repositoryId = ((JSONObject) (response.getBody().getObject().get("repository"))).get("id").toString();
+		return repositoryId;
 	}
 
 	@Override
-	public Item request(Item saveRepository) throws Exception {
-		return rsClient.request("saveRepository", saveRepository);
-	}
-
-	@Override
-	public void afterRequest(Item requestRepositoryResponse) {
-		try {
-			idList.add(requestRepositoryResponse.getContent("repositoryId"));
-		} catch (NoSuchFieldException e) {
-			step++;
-		}
-	}
-
-	@Override
-	public void beforeIteration() {
-		idList.clear();
-	}
-
-	@Override
-	public void afterIteration() throws InvalidOperationNameException, FrameworkException {
-		for (String id : idList) {
-			rsClient.request("deleteRepository", id);
-		}
-		errors.add(step);
-		step = 0;
+	public void afterRequest(String requestRepositoryResponse) throws Exception {
+		delete(buildUrl(REPOSITORY_PATH + "/" + repositoryId));
 	}
 
 	@Override
 	public void afterExperiment() throws Exception {
-		projectClient.request("deleteProject", requestProjectResponse.getContent("projectId"));
-		int cont = 0;
-		for (int step_errors : errors) {
-			System.out.println("Number of errors of step " + (cont++) + ": " + step_errors);
-		}
+		delete(buildUrl(PROJECT_PATH + "/" + projectId));
+	}
+
+	@Override
+	public void configure(Map<Object, Object> options) {
+		configure(options, "kalibro_processor");
 	}
 }
