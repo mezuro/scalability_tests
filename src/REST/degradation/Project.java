@@ -3,7 +3,7 @@ package REST.degradation;
 import java.io.File;
 
 import REST.projectEndpoint.Index;
-import REST.projectEndpoint.DeleteProject;
+import REST.projectEndpoint.Delete;
 import REST.projectEndpoint.Show;
 import REST.projectEndpoint.Exists;
 import REST.projectEndpoint.Save;
@@ -89,7 +89,7 @@ public class Project extends Experiment<Item, Item> {
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(600));
 		startExperiment(false, "saveProject", new Save());
-		startExperiment(true, "deleteProject", new DeleteProject(REQUESTS_PER_STEP));
+		startExperiment(true, "deleteProject", new Delete(REQUESTS_PER_STEP));
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
