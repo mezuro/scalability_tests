@@ -13,6 +13,7 @@ public abstract class RESTStrategy implements Strategy<String>{
 
 	protected final String REPOSITORY_PATH = "repositories";
 	protected final String PROJECT_PATH = "projects";
+	protected final String MODULE_RESULT_PATH = "module_results";
 
 	protected List<String> urls;
 	protected String basePath;
