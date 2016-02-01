@@ -5,7 +5,7 @@ import java.io.File;
 import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.Show;
-import REST.projectEndpoint.ProjectExists;
+import REST.projectEndpoint.Exists;
 import REST.projectEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -83,7 +83,7 @@ public class Project extends Experiment<Item, Item> {
 		experimentStrategy.setParameterInitialValue(1000);
 		experimentStrategy.setFunction(new LinearIncrease(500));
 		startExperiment(false, "allProjects", new Index());
-		startExperiment(false, "projectExists", new ProjectExists());
+		startExperiment(false, "projectExists", new Exists());
 		startExperiment(false, "getProject", new Show());
 
 		experimentStrategy.setParameterInitialValue(50);

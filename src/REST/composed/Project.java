@@ -5,7 +5,7 @@ import java.io.File;
 import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.Show;
-import REST.projectEndpoint.ProjectExists;
+import REST.projectEndpoint.Exists;
 import REST.projectEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -91,7 +91,7 @@ public class Project extends Experiment<Item, Item> {
 		workloadStrategy.setParameterInitialValue(1000);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
 		startExperiment(false, "allProjects", new Index());
-		startExperiment(false, "projectExists", new ProjectExists());
+		startExperiment(false, "projectExists", new Exists());
 		startExperiment(false, "getProject", new Show());
 
 		project.setNumberOfRequestsPerMinute(400);
