@@ -6,7 +6,7 @@ import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.Show;
 import REST.projectEndpoint.ProjectExists;
-import REST.projectEndpoint.SaveProject;
+import REST.projectEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -88,7 +88,7 @@ public class Project extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(600));
-		startExperiment(false, "saveProject", new SaveProject());
+		startExperiment(false, "saveProject", new Save());
 		startExperiment(true, "deleteProject", new DeleteProject(REQUESTS_PER_STEP));
 	}
 

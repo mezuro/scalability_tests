@@ -6,7 +6,7 @@ import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.Show;
 import REST.projectEndpoint.ProjectExists;
-import REST.projectEndpoint.SaveProject;
+import REST.projectEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -96,7 +96,7 @@ public class Project extends Experiment<Item, Item> {
 
 		project.setNumberOfRequestsPerMinute(400);
 		workloadStrategy.setParameterInitialValue(400);
-		startExperiment(false, "saveProject", new SaveProject());
+		startExperiment(false, "saveProject", new Save());
 		project.setNumberOfRequestsPerMinute(1000);
 		startExperiment(true, "deleteProject", new DeleteProject(REQUESTS_PER_STEP));
 	}
