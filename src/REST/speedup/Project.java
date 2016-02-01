@@ -2,7 +2,7 @@ package REST.speedup;
 
 import java.io.File;
 
-import REST.projectEndpoint.AllProjects;
+import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.GetProject;
 import REST.projectEndpoint.ProjectExists;
@@ -77,7 +77,7 @@ public class Project extends Experiment<Item, Item> {
 			new MeanChartCreator()), new SaveToXML(new File("results/speedup/projectResults.xml"))));
 
 		project.setNumberOfRequestsPerMinute(1000);
-		startExperiment(false, "allProjects", new AllProjects());
+		startExperiment(false, "allProjects", new Index());
 		startExperiment(false, "getProject", new GetProject());
 		startExperiment(false, "projectExists", new ProjectExists());
 		project.setNumberOfRequestsPerMinute(400);

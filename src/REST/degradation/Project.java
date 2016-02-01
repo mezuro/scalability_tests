@@ -2,7 +2,7 @@ package REST.degradation;
 
 import java.io.File;
 
-import REST.projectEndpoint.AllProjects;
+import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.GetProject;
 import REST.projectEndpoint.ProjectExists;
@@ -82,7 +82,7 @@ public class Project extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(1000);
 		experimentStrategy.setFunction(new LinearIncrease(500));
-		startExperiment(false, "allProjects", new AllProjects());
+		startExperiment(false, "allProjects", new Index());
 		startExperiment(false, "projectExists", new ProjectExists());
 		startExperiment(false, "getProject", new GetProject());
 

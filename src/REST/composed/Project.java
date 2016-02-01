@@ -2,7 +2,7 @@ package REST.composed;
 
 import java.io.File;
 
-import REST.projectEndpoint.AllProjects;
+import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
 import REST.projectEndpoint.GetProject;
 import REST.projectEndpoint.ProjectExists;
@@ -90,7 +90,7 @@ public class Project extends Experiment<Item, Item> {
 		project.setNumberOfRequestsPerMinute(1000);
 		workloadStrategy.setParameterInitialValue(1000);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(false, "allProjects", new AllProjects());
+		startExperiment(false, "allProjects", new Index());
 		startExperiment(false, "projectExists", new ProjectExists());
 		startExperiment(false, "getProject", new GetProject());
 
