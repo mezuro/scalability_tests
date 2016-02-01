@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.projectEndpoint.Index;
 import REST.projectEndpoint.DeleteProject;
-import REST.projectEndpoint.GetProject;
+import REST.projectEndpoint.Show;
 import REST.projectEndpoint.ProjectExists;
 import REST.projectEndpoint.SaveProject;
 import REST.support.RESTKalibroDeployer;
@@ -78,7 +78,7 @@ public class Project extends Experiment<Item, Item> {
 
 		project.setNumberOfRequestsPerMinute(1000);
 		startExperiment(false, "allProjects", new Index());
-		startExperiment(false, "getProject", new GetProject());
+		startExperiment(false, "getProject", new Show());
 		startExperiment(false, "projectExists", new ProjectExists());
 		project.setNumberOfRequestsPerMinute(400);
 		startExperiment(false, "saveProject", new SaveProject());
