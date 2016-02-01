@@ -80,4 +80,12 @@ public abstract class RESTStrategy implements Strategy<String>{
 				.header("accept", "application/json")
 				.asJson();
 	}
+
+	public HttpResponse<JsonNode> put(String url, JSONObject body) throws Exception {
+		return Unirest.put(url)
+				.header("Content-Type", "application/json")
+				.header("accept", "application/json")
+				.body(body.toString())
+				.asJson();
+	}
 }
