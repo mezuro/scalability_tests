@@ -17,6 +17,7 @@ public abstract class RESTStrategy implements Strategy<String>{
 	protected final String MODULE_RESULT_PATH = "module_results";
 	protected final String METRIC_COLLECTOR_DETAILS_PATH = "metric_collector_details";
 	protected final String KALIBRO_MODULE_PATH = "kalibro_modules";
+	protected final String METRIC_RESULT_PATH = "metric_results";
 
 	protected List<String> urls;
 	protected String basePath;
