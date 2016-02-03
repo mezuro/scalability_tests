@@ -2,7 +2,7 @@ package REST.speedup;
 
 import java.io.File;
 
-import REST.moduleResultEndpoint.ChildrenOf;
+import REST.moduleResultEndpoint.Children;
 import REST.moduleResultEndpoint.GetModuleResult;
 import REST.moduleResultEndpoint.HistoryOfModule;
 import REST.support.RESTKalibroDeployer;
@@ -63,7 +63,7 @@ public class ModuleResult extends Experiment<Item, Item> {
 			new MeanChartCreator()), new SaveToXML(new File("results/speedup/moduleResultResults.xml"))));
 
 		moduleResult.setNumberOfRequestsPerMinute(200);
-		startExperiment(false, "childrenOf", new ChildrenOf());
+		startExperiment(false, "childrenOf", new Children());
 		startExperiment(false, "getModuleResult", new GetModuleResult());
 		startExperiment(true, "historyOfModule", new HistoryOfModule());
 	}

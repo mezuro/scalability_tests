@@ -2,7 +2,7 @@ package REST.composed;
 
 import java.io.File;
 
-import REST.moduleResultEndpoint.ChildrenOf;
+import REST.moduleResultEndpoint.Children;
 import REST.moduleResultEndpoint.GetModuleResult;
 import REST.moduleResultEndpoint.HistoryOfModule;
 import REST.support.RESTKalibroDeployer;
@@ -74,7 +74,7 @@ public class ModuleResult extends Experiment<Item, Item> {
 		moduleResult.setNumberOfRequestsPerMinute(200);
 		workloadStrategy.setParameterInitialValue(500);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(false, "childrensOf", new ChildrenOf());
+		startExperiment(false, "childrensOf", new Children());
 		startExperiment(false, "getModuleResult", new GetModuleResult());
 		startExperiment(true, "historyOfModule", new HistoryOfModule());
 	}

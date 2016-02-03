@@ -2,7 +2,7 @@ package REST.degradation;
 
 import java.io.File;
 
-import REST.moduleResultEndpoint.ChildrenOf;
+import REST.moduleResultEndpoint.Children;
 import REST.moduleResultEndpoint.GetModuleResult;
 import REST.moduleResultEndpoint.HistoryOfModule;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -79,7 +79,7 @@ public class ModuleResult extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(500);
 		experimentStrategy.setFunction(new LinearIncrease(700));
-		startExperiment(false, "childrensOf", new ChildrenOf());
+		startExperiment(false, "childrensOf", new Children());
 		startExperiment(false, "getModuleResult", new GetModuleResult());
 		startExperiment(true, "historyOfModule", new HistoryOfModule());
 	}
