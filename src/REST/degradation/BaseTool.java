@@ -3,7 +3,7 @@ package REST.degradation;
 import java.io.File;
 
 import REST.metricCollectorDetailsEndpoint.Names;
-import REST.metricCollectorDetailsEndpoint.GetBaseTool;
+import REST.metricCollectorDetailsEndpoint.Find;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -52,7 +52,7 @@ public class BaseTool extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(1000);
 		experimentStrategy.setFunction(new LinearIncrease(400));
-		startExperiment(true, "getBaseTool", new GetBaseTool());
+		startExperiment(true, "getBaseTool", new Find());
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)

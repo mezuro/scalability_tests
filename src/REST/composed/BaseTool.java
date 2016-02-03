@@ -3,7 +3,7 @@ package REST.composed;
 import java.io.File;
 
 import REST.metricCollectorDetailsEndpoint.Names;
-import REST.metricCollectorDetailsEndpoint.GetBaseTool;
+import REST.metricCollectorDetailsEndpoint.Find;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -63,7 +63,7 @@ public class BaseTool extends Experiment<Item, Item> {
 		startExperiment(false, "allBaseToolNames", new Names());
 
 		workloadStrategy.setParameterInitialValue(1000);
-		startExperiment(true, "getBaseTool", new GetBaseTool());
+		startExperiment(true, "getBaseTool", new Find());
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)

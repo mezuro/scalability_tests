@@ -3,7 +3,7 @@ package REST.speedup;
 import java.io.File;
 
 import REST.metricCollectorDetailsEndpoint.Names;
-import REST.metricCollectorDetailsEndpoint.GetBaseTool;
+import REST.metricCollectorDetailsEndpoint.Find;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -52,7 +52,7 @@ public class BaseTool extends Experiment<Item, Item> {
 
 		baseTool.setNumberOfRequestsPerMinute(1000);
 		startExperiment(false, "allBaseToolNames", new Names());
-		startExperiment(true, "getBaseTool", new GetBaseTool());
+		startExperiment(true, "getBaseTool", new Find());
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
