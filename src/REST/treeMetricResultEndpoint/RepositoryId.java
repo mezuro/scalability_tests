@@ -13,7 +13,7 @@ import strategy.RESTStrategy;
 public class RepositoryId extends RESTStrategy {
 
 	private String repositoryId;
-	private int metric_result_id;
+	private int tree_metric_result_id;
 
 	@Override
 	public void beforeExperiment() throws Exception {
@@ -40,12 +40,12 @@ public class RepositoryId extends RESTStrategy {
 		HttpResponse<JsonNode> last_processing = get(buildUrl(REPOSITORY_PATH + "/" + repositoryId + "/last_ready_processing"));
 		int root_module_result_id = last_processing.getBody().getObject().getJSONObject("last_ready_processing").getInt("root_module_result_id");
 		HttpResponse<JsonNode> metric_results = get(buildUrl(MODULE_RESULT_PATH + "/" + root_module_result_id + "/metric_results"));
-		metric_result_id = metric_results.getBody().getObject().getJSONArray("tree_metric_results").getJSONObject(0).getInt("id");
+		tree_metric_result_id = metric_results.getBody().getObject().getJSONArray("tree_metric_results").getJSONObject(0).getInt("id");
 	}
 
 	@Override
 	public String request(String string) throws Exception {
-		get(buildUrl(TREE_METRIC_RESULT_PATH + "/" + metric_result_id + "/repository_id"));
+		get(buildUrl(TREE_METRIC_RESULT_PATH + "/" + tree_metric_result_id + "/repository_id"));
 		return repositoryId;
 	}
 
