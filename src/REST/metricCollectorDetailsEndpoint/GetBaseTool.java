@@ -1,4 +1,4 @@
-package REST.baseToolEndpoint;
+package REST.metricCollectorDetailsEndpoint;
 
 import support.RESTStrategy;
 import eu.choreos.vv.clientgenerator.Item;

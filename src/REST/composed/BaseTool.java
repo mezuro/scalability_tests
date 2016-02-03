@@ -2,9 +2,9 @@ package REST.composed;
 
 import java.io.File;
 
+import REST.metricCollectorDetailsEndpoint.Names;
+import REST.metricCollectorDetailsEndpoint.GetBaseTool;
 import REST.support.RESTKalibroDeployer;
-import REST.baseToolEndpoint.AllBaseToolNames;
-import REST.baseToolEndpoint.GetBaseTool;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -60,7 +60,7 @@ public class BaseTool extends Experiment<Item, Item> {
 		baseTool.setNumberOfRequestsPerMinute(1000);
 		workloadStrategy.setParameterInitialValue(100);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(false, "allBaseToolNames", new AllBaseToolNames());
+		startExperiment(false, "allBaseToolNames", new Names());
 
 		workloadStrategy.setParameterInitialValue(1000);
 		startExperiment(true, "getBaseTool", new GetBaseTool());

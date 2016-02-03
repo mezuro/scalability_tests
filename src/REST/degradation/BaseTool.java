@@ -2,8 +2,8 @@ package REST.degradation;
 
 import java.io.File;
 
-import REST.baseToolEndpoint.AllBaseToolNames;
-import REST.baseToolEndpoint.GetBaseTool;
+import REST.metricCollectorDetailsEndpoint.Names;
+import REST.metricCollectorDetailsEndpoint.GetBaseTool;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -48,7 +48,7 @@ public class BaseTool extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(100);
 		experimentStrategy.setFunction(new LinearIncrease(500));
-		startExperiment(true, "allBaseToolNames", new AllBaseToolNames());
+		startExperiment(true, "allBaseToolNames", new Names());
 
 		experimentStrategy.setParameterInitialValue(1000);
 		experimentStrategy.setFunction(new LinearIncrease(400));

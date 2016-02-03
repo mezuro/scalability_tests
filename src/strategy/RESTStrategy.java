@@ -15,6 +15,7 @@ public abstract class RESTStrategy implements Strategy<String>{
 	protected final String PROCESSING_PATH = "processings";
 	protected final String PROJECT_PATH = "projects";
 	protected final String MODULE_RESULT_PATH = "module_results";
+	protected final String METRIC_COLLECTOR_DETAILS_PATH = "metric_collector_details";
 
 	protected List<String> urls;
 	protected String basePath;
