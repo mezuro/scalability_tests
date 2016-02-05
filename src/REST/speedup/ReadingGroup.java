@@ -2,7 +2,7 @@ package REST.speedup;
 
 import java.io.File;
 
-import REST.readingGroupEndpoint.AllReadingGroups;
+import REST.readingGroupEndpoint.Index;
 import REST.readingGroupEndpoint.DeleteReadingGroup;
 import REST.readingGroupEndpoint.Show;
 import REST.readingGroupEndpoint.Exists;
@@ -76,7 +76,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 			new MeanChartCreator()), new SaveToXML(new File("results/speedup/deleteReadingGroupResults.xml"))));
 
 		readingGroup.setNumberOfRequestsPerMinute(1000);
-		startExperiment(false, "allReadingGroups", new AllReadingGroups());
+		startExperiment(false, "allReadingGroups", new Index());
 		startExperiment(false, "getReadingGroup", new Show());
 		startExperiment(false, "readingGroupExists", new Exists());
 		readingGroup.setNumberOfRequestsPerMinute(500);

@@ -2,7 +2,7 @@ package REST.composed;
 
 import java.io.File;
 
-import REST.readingGroupEndpoint.AllReadingGroups;
+import REST.readingGroupEndpoint.Index;
 import REST.readingGroupEndpoint.DeleteReadingGroup;
 import REST.readingGroupEndpoint.Show;
 import REST.readingGroupEndpoint.Exists;
@@ -84,7 +84,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 		readingGroup.setNumberOfRequestsPerMinute(1000);
 		workloadStrategy.setParameterInitialValue(1000);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(false, "allReadingGroups", new AllReadingGroups());
+		startExperiment(false, "allReadingGroups", new Index());
 		startExperiment(false, "readingGroupExists", new Exists());
 		startExperiment(false, "getReadingGroup", new Show());
 
