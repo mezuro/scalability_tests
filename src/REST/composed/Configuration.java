@@ -5,7 +5,7 @@ import java.io.File;
 import REST.kalibroConfigurationEndpoint.AllConfigurations;
 import REST.kalibroConfigurationEndpoint.ConfigurationExists;
 import REST.kalibroConfigurationEndpoint.Delete;
-import REST.kalibroConfigurationEndpoint.GetConfiguration;
+import REST.kalibroConfigurationEndpoint.Show;
 import REST.kalibroConfigurationEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -87,7 +87,7 @@ public class Configuration extends Experiment<Item, Item> {
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
 		startExperiment(false, "allConfigurations", new AllConfigurations());
 		startExperiment(false, "configurationsExists", new ConfigurationExists());
-		startExperiment(false, "getConfiguration", new GetConfiguration());
+		startExperiment(false, "getConfiguration", new Show());
 
 		configuration.setNumberOfRequestsPerMinute(400);
 		workloadStrategy.setParameterInitialValue(400);
