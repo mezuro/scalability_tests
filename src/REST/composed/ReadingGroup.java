@@ -3,7 +3,7 @@ package REST.composed;
 import java.io.File;
 
 import REST.readingGroupEndpoint.Index;
-import REST.readingGroupEndpoint.DeleteReadingGroup;
+import REST.readingGroupEndpoint.Delete;
 import REST.readingGroupEndpoint.Show;
 import REST.readingGroupEndpoint.Exists;
 import REST.support.RESTKalibroDeployer;
@@ -92,7 +92,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 //		workloadStrategy.setParameterInitialValue(150);
 //		startExperiment(false, "saveReadingGroup", new SaveReadingGroup());
 		readingGroup.setNumberOfRequestsPerMinute(1000);
-		startExperiment(true, "deleteReadingGroup", new DeleteReadingGroup(REQUESTS_PER_STEP));
+		startExperiment(true, "deleteReadingGroup", new Delete(REQUESTS_PER_STEP));
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)

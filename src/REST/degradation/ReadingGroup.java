@@ -3,7 +3,7 @@ package REST.degradation;
 import java.io.File;
 
 import REST.readingGroupEndpoint.Index;
-import REST.readingGroupEndpoint.DeleteReadingGroup;
+import REST.readingGroupEndpoint.Delete;
 import REST.readingGroupEndpoint.Show;
 import REST.readingGroupEndpoint.Exists;
 import REST.readingGroupEndpoint.Save;
@@ -84,7 +84,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(600));
 		startExperiment(false, "saveReadingGroup", new Save());
-		startExperiment(true, "deleteReadingGroup", new DeleteReadingGroup(REQUESTS_PER_STEP));
+		startExperiment(true, "deleteReadingGroup", new Delete(REQUESTS_PER_STEP));
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
