@@ -2,7 +2,7 @@ package REST.speedup;
 
 import java.io.File;
 
-import REST.metricConfigurationEndpoint.DeleteMetricConfiguration;
+import REST.metricConfigurationEndpoint.Delete;
 import REST.metricConfigurationEndpoint.GetMetricConfiguration;
 import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
 import REST.metricConfigurationEndpoint.SaveMetricConfiguration;
@@ -83,7 +83,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 		metricConfiguration.setNumberOfRequestsPerMinute(250);
 		startExperiment(false, "saveMetricConfiguration", new SaveMetricConfiguration());
 		metricConfiguration.setNumberOfRequestsPerMinute(1000);
-		startExperiment(true, "deleteMetricConfiguration", new DeleteMetricConfiguration(REQUESTS_PER_STEP));
+		startExperiment(true, "deleteMetricConfiguration", new Delete(REQUESTS_PER_STEP));
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
