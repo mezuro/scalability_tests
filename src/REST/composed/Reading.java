@@ -3,7 +3,7 @@ package REST.composed;
 import java.io.File;
 
 import REST.readingEndpoint.Delete;
-import REST.readingEndpoint.GetReading;
+import REST.readingEndpoint.Show;
 import REST.readingEndpoint.Index;
 import REST.readingEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
@@ -86,7 +86,7 @@ public class Reading extends Experiment<Item, Item> {
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
 		startExperiment(false, "readingsOf", new Index());
 		reading.setNumberOfRequestsPerMinute(800);
-		startExperiment(false, "getReading", new GetReading());
+		startExperiment(false, "getReading", new Show());
 		reading.setNumberOfRequestsPerMinute(600);
 		workloadStrategy.setParameterInitialValue(250);
 		startExperiment(false, "saveReading", new Save());

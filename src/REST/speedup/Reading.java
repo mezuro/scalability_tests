@@ -3,7 +3,7 @@ package REST.speedup;
 import java.io.File;
 
 import REST.readingEndpoint.Delete;
-import REST.readingEndpoint.GetReading;
+import REST.readingEndpoint.Show;
 import REST.readingEndpoint.Index;
 import REST.readingEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
@@ -75,7 +75,7 @@ public class Reading extends Experiment<Item, Item> {
 			new MeanChartCreator()), new SaveToXML(new File("results/speedup/readingResults.xml"))));
 
 		reading.setNumberOfRequestsPerMinute(600);
-		startExperiment(false, "getReading", new GetReading());
+		startExperiment(false, "getReading", new Show());
 		reading.setNumberOfRequestsPerMinute(800);
 		startExperiment(false, "readingsOf", new Index());
 		reading.setNumberOfRequestsPerMinute(600);

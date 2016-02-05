@@ -3,7 +3,7 @@ package REST.degradation;
 import java.io.File;
 
 import REST.readingEndpoint.Delete;
-import REST.readingEndpoint.GetReading;
+import REST.readingEndpoint.Show;
 import REST.readingEndpoint.Index;
 import REST.readingEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -82,7 +82,7 @@ public class Reading extends Experiment<Item, Item> {
 		experimentStrategy.setParameterInitialValue(500);
 		experimentStrategy.setFunction(new LinearIncrease(500));
 		startExperiment(false, "readingsOf", new Index());
-		startExperiment(false, "getReading", new GetReading());
+		startExperiment(false, "getReading", new Show());
 
 		experimentStrategy.setParameterInitialValue(100);
 		experimentStrategy.setFunction(new LinearIncrease(350));
