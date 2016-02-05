@@ -23,6 +23,7 @@ public abstract class RESTStrategy implements Strategy<String>{
 	protected final String READING_GROUP_PATH = "reading_groups";
 	protected final String READING_PATH = "readings";
 	protected final String KALIBRO_CONFIGURATION_PATH = "kalibro_configurations";
+	protected final String METRIC_CONFIGURATION_PATH = "metric_configurations";
 
 	protected List<String> urls;
 	protected String basePath;
