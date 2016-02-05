@@ -1,4 +1,4 @@
-package REST.configurationEndpoint;
+package REST.kalibroConfigurationEndpoint;
 
 import java.util.ArrayList;
 import java.util.List;

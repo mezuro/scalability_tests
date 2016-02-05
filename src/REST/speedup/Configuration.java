@@ -2,12 +2,12 @@ package REST.speedup;
 
 import java.io.File;
 
+import REST.kalibroConfigurationEndpoint.AllConfigurations;
+import REST.kalibroConfigurationEndpoint.ConfigurationExists;
+import REST.kalibroConfigurationEndpoint.DeleteConfiguration;
+import REST.kalibroConfigurationEndpoint.GetConfiguration;
+import REST.kalibroConfigurationEndpoint.SaveConfiguration;
 import REST.support.RESTKalibroDeployer;
-import REST.configurationEndpoint.AllConfigurations;
-import REST.configurationEndpoint.ConfigurationExists;
-import REST.configurationEndpoint.DeleteConfiguration;
-import REST.configurationEndpoint.GetConfiguration;
-import REST.configurationEndpoint.SaveConfiguration;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;

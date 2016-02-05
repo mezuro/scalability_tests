@@ -1,4 +1,4 @@
-package REST.configurationEndpoint;
+package REST.kalibroConfigurationEndpoint;
 
 import eu.choreos.vv.clientgenerator.Item;
 import strategy.RESTStrategy;
