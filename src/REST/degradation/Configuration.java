@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.kalibroConfigurationEndpoint.AllConfigurations;
 import REST.kalibroConfigurationEndpoint.ConfigurationExists;
-import REST.kalibroConfigurationEndpoint.DeleteConfiguration;
+import REST.kalibroConfigurationEndpoint.Delete;
 import REST.kalibroConfigurationEndpoint.GetConfiguration;
 import REST.kalibroConfigurationEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -83,7 +83,7 @@ public class Configuration extends Experiment<Item, Item> {
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(600));
 		startExperiment(false, "saveConfiguration", new Save());
-		startExperiment(true, "deleteConfiguration", new DeleteConfiguration(REQUESTS_PER_STEP));
+		startExperiment(true, "deleteConfiguration", new Delete(REQUESTS_PER_STEP));
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
