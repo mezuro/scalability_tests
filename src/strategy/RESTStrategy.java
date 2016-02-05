@@ -20,6 +20,7 @@ public abstract class RESTStrategy implements Strategy<String>{
 	protected final String METRIC_RESULT_PATH = "metric_results";
 	protected final String TREE_METRIC_RESULT_PATH = "tree_metric_results";
 	protected final String HOTSPOT_METRIC_RESULT_PATH = "hotspot_metric_results";
+	protected final String READING_GROUP_PATH = "reading_groups";
 
 	protected List<String> urls;
 	protected String basePath;

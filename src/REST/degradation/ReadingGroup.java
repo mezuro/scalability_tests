@@ -6,7 +6,7 @@ import REST.readingGroupEndpoint.AllReadingGroups;
 import REST.readingGroupEndpoint.DeleteReadingGroup;
 import REST.readingGroupEndpoint.GetReadingGroup;
 import REST.readingGroupEndpoint.ReadingGroupExists;
-import REST.readingGroupEndpoint.SaveReadingGroup;
+import REST.readingGroupEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -83,7 +83,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(600));
-		startExperiment(false, "saveReadingGroup", new SaveReadingGroup());
+		startExperiment(false, "saveReadingGroup", new Save());
 		startExperiment(true, "deleteReadingGroup", new DeleteReadingGroup(REQUESTS_PER_STEP));
 	}
 
