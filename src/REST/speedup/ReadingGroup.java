@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.readingGroupEndpoint.AllReadingGroups;
 import REST.readingGroupEndpoint.DeleteReadingGroup;
-import REST.readingGroupEndpoint.GetReadingGroup;
+import REST.readingGroupEndpoint.Show;
 import REST.readingGroupEndpoint.ReadingGroupExists;
 import REST.readingGroupEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
@@ -77,7 +77,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 
 		readingGroup.setNumberOfRequestsPerMinute(1000);
 		startExperiment(false, "allReadingGroups", new AllReadingGroups());
-		startExperiment(false, "getReadingGroup", new GetReadingGroup());
+		startExperiment(false, "getReadingGroup", new Show());
 		startExperiment(false, "readingGroupExists", new ReadingGroupExists());
 		readingGroup.setNumberOfRequestsPerMinute(500);
 		startExperiment(false, "saveReadingGroup", new Save());
