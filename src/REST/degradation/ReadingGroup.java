@@ -5,7 +5,7 @@ import java.io.File;
 import REST.readingGroupEndpoint.AllReadingGroups;
 import REST.readingGroupEndpoint.DeleteReadingGroup;
 import REST.readingGroupEndpoint.Show;
-import REST.readingGroupEndpoint.ReadingGroupExists;
+import REST.readingGroupEndpoint.Exists;
 import REST.readingGroupEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -78,7 +78,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 		experimentStrategy.setParameterInitialValue(1000);
 		experimentStrategy.setFunction(new LinearIncrease(500));
 		startExperiment(false, "allReadingGroups", new AllReadingGroups());
-		startExperiment(false, "readingGroupExists", new ReadingGroupExists());
+		startExperiment(false, "readingGroupExists", new Exists());
 		startExperiment(false, "getReadingGroup", new Show());
 
 		experimentStrategy.setParameterInitialValue(50);

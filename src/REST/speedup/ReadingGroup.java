@@ -5,7 +5,7 @@ import java.io.File;
 import REST.readingGroupEndpoint.AllReadingGroups;
 import REST.readingGroupEndpoint.DeleteReadingGroup;
 import REST.readingGroupEndpoint.Show;
-import REST.readingGroupEndpoint.ReadingGroupExists;
+import REST.readingGroupEndpoint.Exists;
 import REST.readingGroupEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -78,7 +78,7 @@ public class ReadingGroup extends Experiment<Item, Item> {
 		readingGroup.setNumberOfRequestsPerMinute(1000);
 		startExperiment(false, "allReadingGroups", new AllReadingGroups());
 		startExperiment(false, "getReadingGroup", new Show());
-		startExperiment(false, "readingGroupExists", new ReadingGroupExists());
+		startExperiment(false, "readingGroupExists", new Exists());
 		readingGroup.setNumberOfRequestsPerMinute(500);
 		startExperiment(false, "saveReadingGroup", new Save());
 		readingGroup.setNumberOfRequestsPerMinute(1000);
