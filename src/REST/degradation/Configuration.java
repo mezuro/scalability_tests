@@ -6,7 +6,7 @@ import REST.kalibroConfigurationEndpoint.AllConfigurations;
 import REST.kalibroConfigurationEndpoint.ConfigurationExists;
 import REST.kalibroConfigurationEndpoint.DeleteConfiguration;
 import REST.kalibroConfigurationEndpoint.GetConfiguration;
-import REST.kalibroConfigurationEndpoint.SaveConfiguration;
+import REST.kalibroConfigurationEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -82,7 +82,7 @@ public class Configuration extends Experiment<Item, Item> {
 		startExperiment(false, "getConfiguration", new GetConfiguration());
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(600));
-		startExperiment(false, "saveConfiguration", new SaveConfiguration());
+		startExperiment(false, "saveConfiguration", new Save());
 		startExperiment(true, "deleteConfiguration", new DeleteConfiguration(REQUESTS_PER_STEP));
 	}
 
