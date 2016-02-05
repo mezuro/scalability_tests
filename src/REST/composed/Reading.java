@@ -2,7 +2,7 @@ package REST.composed;
 
 import java.io.File;
 
-import REST.readingEndpoint.DeleteReading;
+import REST.readingEndpoint.Delete;
 import REST.readingEndpoint.GetReading;
 import REST.readingEndpoint.ReadingsOf;
 import REST.readingEndpoint.SaveReading;
@@ -91,7 +91,7 @@ public class Reading extends Experiment<Item, Item> {
 		workloadStrategy.setParameterInitialValue(250);
 		startExperiment(false, "saveReading", new SaveReading());
 		reading.setNumberOfRequestsPerMinute(1000);
-		startExperiment(true, "deleteReading", new DeleteReading(REQUESTS_PER_STEP));
+		startExperiment(true, "deleteReading", new Delete(REQUESTS_PER_STEP));
 	}
 
 	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
