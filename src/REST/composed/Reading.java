@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.readingEndpoint.Delete;
 import REST.readingEndpoint.GetReading;
-import REST.readingEndpoint.ReadingsOf;
+import REST.readingEndpoint.Index;
 import REST.readingEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -84,7 +84,7 @@ public class Reading extends Experiment<Item, Item> {
 		reading.setNumberOfRequestsPerMinute(600);
 		workloadStrategy.setParameterInitialValue(500);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(false, "readingsOf", new ReadingsOf());
+		startExperiment(false, "readingsOf", new Index());
 		reading.setNumberOfRequestsPerMinute(800);
 		startExperiment(false, "getReading", new GetReading());
 		reading.setNumberOfRequestsPerMinute(600);

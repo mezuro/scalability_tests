@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.readingEndpoint.Delete;
 import REST.readingEndpoint.GetReading;
-import REST.readingEndpoint.ReadingsOf;
+import REST.readingEndpoint.Index;
 import REST.readingEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -81,7 +81,7 @@ public class Reading extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(500);
 		experimentStrategy.setFunction(new LinearIncrease(500));
-		startExperiment(false, "readingsOf", new ReadingsOf());
+		startExperiment(false, "readingsOf", new Index());
 		startExperiment(false, "getReading", new GetReading());
 
 		experimentStrategy.setParameterInitialValue(100);
