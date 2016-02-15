@@ -3,7 +3,7 @@ package REST.composed;
 import java.io.File;
 
 import REST.metricConfigurationEndpoint.Delete;
-import REST.metricConfigurationEndpoint.GetMetricConfiguration;
+import REST.metricConfigurationEndpoint.Show;
 import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
 import REST.metricConfigurationEndpoint.SaveMetricConfiguration;
 import REST.support.RESTKalibroDeployer;
@@ -91,7 +91,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 		metricConfiguration.setNumberOfRequestsPerStep(REQUESTS_PER_STEP);
 		metricConfiguration.setNumberOfRequestsPerMinute(1000);
 		workloadStrategy.setParameterInitialValue(400);
-		startExperiment(false, "getMetricConfiguration", new GetMetricConfiguration());
+		startExperiment(false, "getMetricConfiguration", new Show());
 
 		workloadStrategy.setParameterInitialValue(50);
 		metricConfiguration.setNumberOfRequestsPerMinute(250);

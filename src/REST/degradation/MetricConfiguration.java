@@ -3,7 +3,7 @@ package REST.degradation;
 import java.io.File;
 
 import REST.metricConfigurationEndpoint.Delete;
-import REST.metricConfigurationEndpoint.GetMetricConfiguration;
+import REST.metricConfigurationEndpoint.Show;
 import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
 import REST.metricConfigurationEndpoint.SaveMetricConfiguration;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -89,7 +89,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 		metricConfiguration.setNumberOfRequestsPerStep(REQUESTS_PER_STEP);
 		experimentStrategy.setParameterInitialValue(300);
 		experimentStrategy.setFunction(new LinearIncrease(500));
-		startExperiment(false, "getMetricConfiguration", new GetMetricConfiguration());
+		startExperiment(false, "getMetricConfiguration", new Show());
 
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(300));
