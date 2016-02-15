@@ -5,7 +5,7 @@ import java.io.File;
 import REST.metricConfigurationEndpoint.Delete;
 import REST.metricConfigurationEndpoint.Show;
 import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
-import REST.metricConfigurationEndpoint.SaveMetricConfiguration;
+import REST.metricConfigurationEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
 import eu.choreos.vv.analysis.SaveToXML;
@@ -93,7 +93,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(50);
 		experimentStrategy.setFunction(new LinearIncrease(300));
-		startExperiment(false, "saveMetricConfiguration", new SaveMetricConfiguration());
+		startExperiment(false, "saveMetricConfiguration", new Save());
 
 		experimentStrategy.setParameterInitialValue(350);
 		experimentStrategy.setFunction(new LinearIncrease(500));

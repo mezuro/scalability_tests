@@ -5,7 +5,7 @@ import java.io.File;
 import REST.metricConfigurationEndpoint.Delete;
 import REST.metricConfigurationEndpoint.Show;
 import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
-import REST.metricConfigurationEndpoint.SaveMetricConfiguration;
+import REST.metricConfigurationEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -81,7 +81,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 		metricConfiguration.setNumberOfRequestsPerMinute(1000);
 		startExperiment(false, "getMetricConfiguration", new Show());
 		metricConfiguration.setNumberOfRequestsPerMinute(250);
-		startExperiment(false, "saveMetricConfiguration", new SaveMetricConfiguration());
+		startExperiment(false, "saveMetricConfiguration", new Save());
 		metricConfiguration.setNumberOfRequestsPerMinute(1000);
 		startExperiment(true, "deleteMetricConfiguration", new Delete(REQUESTS_PER_STEP));
 	}
