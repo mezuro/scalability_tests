@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.metricConfigurationEndpoint.Delete;
 import REST.metricConfigurationEndpoint.Show;
-import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
+import REST.metricConfigurationEndpoint.Update;
 import REST.metricConfigurationEndpoint.Save;
 import eu.choreos.vv.analysis.AggregatePerformance;
 import eu.choreos.vv.analysis.ComposedAnalysis;
@@ -83,7 +83,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 
 		experimentStrategy.setParameterInitialValue(8);
 		experimentStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(true, "metricConfigurationsOf", new MetricConfigurationsOf());
+		startExperiment(true, "metricConfigurationsOf", new Update());
 
 		metricConfiguration.setNumberOfSteps(10);
 		metricConfiguration.setNumberOfRequestsPerStep(REQUESTS_PER_STEP);

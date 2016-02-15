@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.metricConfigurationEndpoint.Delete;
 import REST.metricConfigurationEndpoint.Show;
-import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
+import REST.metricConfigurationEndpoint.Update;
 import REST.metricConfigurationEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -77,7 +77,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 			new MeanChartCreator()), new SaveToXML(new File("results/speedup/metricConfigurationResults.xml"))));
 
 		metricConfiguration.setNumberOfRequestsPerMinute(75);
-		startExperiment(false, "metricConfigurationsOf", new MetricConfigurationsOf());
+		startExperiment(false, "metricConfigurationsOf", new Update());
 		metricConfiguration.setNumberOfRequestsPerMinute(1000);
 		startExperiment(false, "getMetricConfiguration", new Show());
 		metricConfiguration.setNumberOfRequestsPerMinute(250);

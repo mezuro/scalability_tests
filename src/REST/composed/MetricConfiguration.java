@@ -4,7 +4,7 @@ import java.io.File;
 
 import REST.metricConfigurationEndpoint.Delete;
 import REST.metricConfigurationEndpoint.Show;
-import REST.metricConfigurationEndpoint.MetricConfigurationsOf;
+import REST.metricConfigurationEndpoint.Update;
 import REST.metricConfigurationEndpoint.Save;
 import REST.support.RESTKalibroDeployer;
 import eu.choreos.vv.analysis.AggregatePerformance;
@@ -86,7 +86,7 @@ public class MetricConfiguration extends Experiment<Item, Item> {
 		metricConfiguration.setNumberOfRequestsPerMinute(75);
 		workloadStrategy.setParameterInitialValue(8);
 		workloadStrategy.setFunction(new ExponentialIncrease(2));
-		startExperiment(false, "metricConfigurationsOf", new MetricConfigurationsOf());
+		startExperiment(false, "metricConfigurationsOf", new Update());
 
 		metricConfiguration.setNumberOfRequestsPerStep(REQUESTS_PER_STEP);
 		metricConfiguration.setNumberOfRequestsPerMinute(1000);
