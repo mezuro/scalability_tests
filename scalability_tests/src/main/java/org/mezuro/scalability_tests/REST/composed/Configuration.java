@@ -1,0 +1,103 @@
+package org.mezuro.scalability_tests.REST.composed;
+
+import java.io.File;
+
+import org.mezuro.scalability_tests.REST.kalibroConfigurationEndpoint.AllConfigurations;
+import org.mezuro.scalability_tests.REST.kalibroConfigurationEndpoint.ConfigurationExists;
+import org.mezuro.scalability_tests.REST.kalibroConfigurationEndpoint.Delete;
+import org.mezuro.scalability_tests.REST.kalibroConfigurationEndpoint.Show;
+import org.mezuro.scalability_tests.REST.kalibroConfigurationEndpoint.Save;
+import org.mezuro.scalability_tests.REST.support.RESTKalibroDeployer;
+import eu.choreos.vv.analysis.AggregatePerformance;
+import eu.choreos.vv.analysis.ComposedAnalysis;
+import eu.choreos.vv.analysis.SaveToXML;
+import eu.choreos.vv.chart.creator.MeanChartCreator;
+import eu.choreos.vv.clientgenerator.Item;
+import eu.choreos.vv.clientgenerator.RSClient;
+import eu.choreos.vv.experiments.Experiment;
+import eu.choreos.vv.experiments.strategy.ComposedStrategy;
+import eu.choreos.vv.experiments.strategy.ExperimentStrategy;
+import eu.choreos.vv.experiments.strategy.ParameterScaling;
+import eu.choreos.vv.experiments.strategy.WorkloadScaling;
+import eu.choreos.vv.increasefunctions.ExponentialIncrease;
+import eu.choreos.vv.increasefunctions.LinearIncrease;
+import org.mezuro.scalability_tests.strategy.RESTStrategy;
+
+public class Configuration extends Experiment<Item, Item> {
+
+	private static final int REQUESTS_PER_STEP = 30;
+	private RESTStrategy configurationStrategy;
+	private static Configuration configuration;
+
+	public void setConfigurationStrategy(RESTStrategy configurationStrategy) {
+		this.configurationStrategy = configurationStrategy;
+	}
+
+	@Override
+	public void afterRequest(Item resquestResponse) throws Exception {
+		configurationStrategy.afterRequest(resquestResponse);
+	}
+
+	@Override
+	public Item beforeRequest() throws Exception {
+		return configurationStrategy.beforeRequest();
+	}
+
+	@Override
+	public void afterIteration() throws Exception {
+		configurationStrategy.afterIteration();
+	}
+
+	@Override
+	public void afterExperiment() throws Exception {
+		configurationStrategy.afterExperiment();
+	}
+
+	@Override
+	public void beforeIteration() throws Exception {
+		configurationStrategy.beforeIteration();
+		configurationStrategy.setRsClient(new RSClient(getDeployer().getServiceUris("Configuration").get(0)));
+	}
+
+	@Override
+	public Item request(Item item) throws Exception {
+		return configurationStrategy.request(item);
+	}
+
+	public static void main(String[] args) throws Exception {
+		configuration = new Configuration();
+
+		configuration.setDeployer(new RESTKalibroDeployer());
+		ExperimentStrategy capacityStrategy = new ParameterScaling("");
+		capacityStrategy.setParameterInitialValue(1);
+		capacityStrategy.setFunction(new LinearIncrease(1));
+
+		ExperimentStrategy workloadStrategy = new WorkloadScaling();
+
+		ExperimentStrategy composedStrategy = new ComposedStrategy(capacityStrategy, workloadStrategy);
+		configuration.setStrategy(composedStrategy);
+
+		configuration.setNumberOfRequestsPerStep(REQUESTS_PER_STEP);
+		configuration.setNumberOfSteps(4);
+		configuration.setAnalyser(new ComposedAnalysis(new AggregatePerformance("Configuration Aggregate Performance",
+			new MeanChartCreator()), new SaveToXML(new File("results/composed/configurationResults.xml"))));
+
+		configuration.setNumberOfRequestsPerMinute(1000);
+		workloadStrategy.setParameterInitialValue(100);
+		workloadStrategy.setFunction(new ExponentialIncrease(2));
+		startExperiment(false, "allConfigurations", new AllConfigurations());
+		startExperiment(false, "configurationsExists", new ConfigurationExists());
+		startExperiment(false, "getConfiguration", new Show());
+
+		configuration.setNumberOfRequestsPerMinute(400);
+		workloadStrategy.setParameterInitialValue(400);
+		startExperiment(false, "saveConfiguration", new Save());
+		startExperiment(true, "deleteConfiguration", new Delete(REQUESTS_PER_STEP));
+	}
+
+	private static void startExperiment(boolean plotGraph, String label, RESTStrategy strategy)
+		throws Exception {
+		configuration.setConfigurationStrategy(strategy);
+		configuration.run(label, plotGraph);
+	}
+}
