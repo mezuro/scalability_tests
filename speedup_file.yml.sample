@@ -8,4 +8,4 @@ initialWorkloadValue:
 increaseWorkloadFunction:	
 increaseWorkloadFunctionParameter:	
 plotGraph: false
-experientName: processRepository
+experientName: REST.repositoryEndpoint.FirstProcessing
