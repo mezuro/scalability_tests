@@ -9,13 +9,12 @@ import org.mezuro.scalability_tests.strategy.RESTStrategy;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
-public class Save extends RESTStrategy {
+public class Delete extends RESTStrategy {
 
 	private String configurationId;
 	private String metricConfigurationId;
 	private Object readingId;
 	private String readingGroupId;
-	private HashMap<String, Object> range;
 	private String rangeId;
 
 	@Override
@@ -74,31 +73,29 @@ public class Save extends RESTStrategy {
 	
 	@Override
 	public String beforeRequest() throws Exception {
+		HashMap<String, HashMap<String, Object>> parameters = new HashMap<String, HashMap<String, Object>>();
+		HashMap<String, Object> range;
+		
 		range = new HashMap<String, Object>();
 		range.put("beginning", "0.0");
 		range.put("end", "1.0");
 		range.put("metric_configuration_id", metricConfigurationId.toString());
 		range.put("reading_id", readingId.toString());
-
-		return null;
-	}
-
-	@Override
-	public String request(String string) throws Exception {
-		HashMap<String, HashMap<String, Object>> parameters = new HashMap<String, HashMap<String, Object>>();
 		parameters.put("kalibro_range", range);
+
 		JSONObject jsonBody = new JSONObject(parameters);
 		HttpResponse<JsonNode> response = post(buildUrl(METRIC_CONFIGURATION_PATH + "/" + metricConfigurationId + "/" + KALIBRO_RANGE_PATH), jsonBody);
 		
 		rangeId = ((JSONObject) (response.getBody().getObject().get("kalibro_range"))).get("id").toString();
 		return null;
 	}
-	
-	@Override
-	public void afterRequest(String requestResponse) throws Exception {
-		delete(buildUrl(METRIC_CONFIGURATION_PATH + "/" + metricConfigurationId + "/" + KALIBRO_RANGE_PATH + "/" + rangeId));
-	}
 
+	@Override
+	public String request(String string) throws Exception {
+		delete(buildUrl(METRIC_CONFIGURATION_PATH + "/" + metricConfigurationId + "/" + KALIBRO_RANGE_PATH + "/" + rangeId));
+		return null;
+	}
+	
 	@Override
 	public void afterExperiment() throws Exception {
 		delete(buildUrl(KALIBRO_CONFIGURATION_PATH + "/" + configurationId));
