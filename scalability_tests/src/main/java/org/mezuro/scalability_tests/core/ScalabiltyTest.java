@@ -21,8 +21,8 @@ public class ScalabiltyTest {
 		architecture = args[0].toUpperCase();
 		testConfiguration = new TestConfiguration(args[1]);
 		
-		Class<?> experimentClass = Class.forName("core." + testConfiguration.getMetric() + "Experiment");
-		if (architecture.equals("org/mezuro/scalability_tests/REST"))	{
+		Class<?> experimentClass = Class.forName("org.mezuro.scalability_tests.core." + testConfiguration.getMetric() + "Experiment");
+		if (architecture.equals("REST"))	{
 			RESTStrategy restStrategy = (RESTStrategy) initSubject(testConfiguration.getSubjectName()).newInstance();
 			restStrategy.configure(serviceConfiguration);
 			KalibroExperiment<String> experiment = (KalibroExperiment<String>) experimentClass.newInstance();
@@ -39,16 +39,6 @@ public class ScalabiltyTest {
 	}
 
 	private static Class<?> initSubject(String subjectName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		String className = null;
-		String[] splittedSubjectName = StringUtils.splitByCharacterTypeCamelCase(subjectName);
-
-		if(splittedSubjectName.length > 1)
-			className = subjectName;
-		else {
-			String endpointName = splittedSubjectName[splittedSubjectName.length-1].toLowerCase();
-			className = architecture + "." + endpointName + "Endpoint." + StringUtils.capitalize(subjectName);
-		}
-
-		return Class.forName(className);
+		return Class.forName("org.mezuro.scalability_tests." + subjectName);
 	}
 }
