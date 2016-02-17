@@ -24,6 +24,7 @@ public abstract class RESTStrategy implements Strategy<String>{
 	protected final String READING_PATH = "readings";
 	protected final String KALIBRO_CONFIGURATION_PATH = "kalibro_configurations";
 	protected final String METRIC_CONFIGURATION_PATH = "metric_configurations";
+	protected final String KALIBRO_RANGE_PATH = "kalibro_ranges";
 
 	protected List<String> urls;
 	protected String basePath;
