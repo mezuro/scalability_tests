@@ -76,6 +76,14 @@ public abstract class RESTStrategy implements Strategy<String>{
 				.header("accept", "application/json")
 				.asJson();
 	}
+	
+	public HttpResponse<JsonNode> get(String url, String key, String queryString) throws Exception {
+		return Unirest.get(url)
+				.header("Content-Type", "application/json")
+				.header("accept", "application/json")
+				.queryString(key, queryString)
+				.asJson();
+	}
 
 	public HttpResponse<JsonNode> post(String url, JSONObject body) throws Exception {
 		return Unirest.post(url)
