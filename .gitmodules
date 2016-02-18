@@ -1,0 +1,6 @@
+[submodule "choreos_v-v"]
+	path = choreos_v-v
+	url = https://github.com/choreos/choreos_v-v.git
+[submodule "enactment_engine"]
+	path = enactment_engine
+	url = https://github.com/choreos/enactment_engine.git

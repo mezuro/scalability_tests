@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>scalability_tests-parent</name>
+  <url>https://github.com/mezuro/scalability_tests</url>
+
+  <groupId>org.mezuro</groupId>
+  <artifactId>scalability_tests-parent</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.mezuro.scalability_tests.core.ScalabiltyTest</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <modules>
+    <module>enactment_engine/EnactmentEngineAPI</module>
+    <module>choreos_v-v/scalability_explorer</module>
+    <module>choreos_v-v/rehearsal</module>
+    <module>scalability_tests</module>
+  </modules>
+</project>

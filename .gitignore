@@ -1,2 +1,9 @@
 target/
 /*.yml
+.settings/org.eclipse.m2e.core.prefs
+scalability_tests/.classpath
+scalability_tests/.project
+scalability_tests/.settings/
+scalability_tests/degradation_file.yml
+scalability_tests/services_configuration.yml
+choreos_v-v
